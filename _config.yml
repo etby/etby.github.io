@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: Etby's Blog
+subtitle: 格物、致知、诚意、正心
 description:
 keywords:
-author: John Doe
-language:
+author: Etby
+language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://blog.etby.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -78,4 +78,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:etby/etby.github.io.git
+  branch: master
+  message: 
+
