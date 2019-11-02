@@ -1,5 +1,5 @@
 ---
-title: 使用Nexus搭建私有Maven仓库
+title: 使用 Nexus 搭建私有 Maven 仓库
 date: 2017-10-22 21:39:31
 categories: DevOps
 tags: 
