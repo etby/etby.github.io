@@ -56,6 +56,20 @@ brew cask install 1password
 brew cask install joplin
 ```
 
+### Typora
+
+```
+brew cask install typora
+```
+
+### Telegram
+
+```
+brew cask install telegram-desktop
+```
+
+
+
 ## 通用开发环境
 
 ### VSCode
@@ -68,6 +82,24 @@ brew cask install visual-studio-code
 
 ```
 brew cask install jetbrains-toolbox
+```
+
+### Docker
+
+```
+brew cask install docker
+```
+
+### Anisble
+
+```
+brew install ansible
+```
+
+### Git Flow
+
+```
+brew install git-flow-avh
 ```
 
 ## 前端开发环境
