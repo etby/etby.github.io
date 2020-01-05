@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Etby&#39;s Blog">
+<meta property="og:url" content="http://blog.etby.org/index.html">
+<meta property="og:site_name" content="Etby&#39;s Blog">
+<meta property="article:author" content="Etby">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Etby's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/01/05/openwrt-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/05/openwrt-config/" class="post-title-link" itemprop="url">OpenWrt 路由器配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-01-05 14:44:09 / Modified: 15:55:58" itemprop="dateCreated datePublished" datetime="2020-01-05T14:44:09+08:00">2020-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="INIT"><a href="#INIT" class="headerlink" title="INIT"></a>INIT</h2><p><strong>Change Password</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password</span><br></pre></td></tr></table></figure>
+
+<h2 id="WAN"><a href="#WAN" class="headerlink" title="WAN"></a>WAN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Config Static IP</span><br><span class="line">uci set network.wan.proto&#x3D;static</span><br><span class="line">uci set network.wan.ipaddr&#x3D;10.10.10.5</span><br><span class="line">uci set network.wan.netmask&#x3D;255.255.255.0</span><br><span class="line">uci set network.wan.gateway&#x3D;10.10.10.1</span><br><span class="line"></span><br><span class="line"># Review Config</span><br><span class="line">uci export network</span><br><span class="line"></span><br><span class="line"># Commit UCI Config, need restart network to working.</span><br><span class="line">uci commit</span><br></pre></td></tr></table></figure>
+
+<h2 id="LAN"><a href="#LAN" class="headerlink" title="LAN"></a>LAN</h2><blockquote>
+<p>Use edit config files way.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;config&#x2F;network</span><br><span class="line"></span><br><span class="line">config interface &#39;lan&#39;</span><br><span class="line">        option type &#39;bridge&#39;</span><br><span class="line">        option ifname &#39;eth0&#39;</span><br><span class="line">        option proto &#39;static&#39;</span><br><span class="line">        option ipaddr &#39;192.168.1.1&#39;</span><br><span class="line">        option netmask &#39;255.255.255.0&#39;</span><br><span class="line">        option dns &#39;10.10.10.1&#39;</span><br><span class="line">        option ip6assign &#39;60&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WLAN"><a href="#WLAN" class="headerlink" title="WLAN"></a>WLAN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Enable Wireless Device</span><br><span class="line">uci set wireless.@wifi-device[0].disabled&#x3D;0</span><br><span class="line"></span><br><span class="line"># Config Wireless</span><br><span class="line">uci set wireless.@wifi-iface[0].mode&#x3D;ap</span><br><span class="line">uci set wireless.@wifi-iface[0].ssid&#x3D;TSFuShui</span><br><span class="line">uci set wireless.@wifi-iface[0].encryption&#x3D;psk2</span><br><span class="line">uci set wireless.@wifi-iface[0].key&#x3D;88888888</span><br><span class="line">uci set wireless.@wifi-iface[0].network&#x3D;lan</span><br><span class="line"></span><br><span class="line"># Review Config</span><br><span class="line">uci export wireless</span><br><span class="line"></span><br><span class="line"># Commit UCI Config, need restart network to working.</span><br><span class="line">uci commit</span><br></pre></td></tr></table></figure>
+
+<h2 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Restart network to apply config</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;network restart</span><br><span class="line"></span><br><span class="line"># If ping is ok, Good Net.</span><br><span class="line">ping 1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="PACKAGE"><a href="#PACKAGE" class="headerlink" title="PACKAGE"></a>PACKAGE</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># update package list</span><br><span class="line">opkg update</span><br><span class="line"></span><br><span class="line"># show upgrable pkg</span><br><span class="line">opkg list-upgradable</span><br><span class="line"></span><br><span class="line"># upgrade one pkg</span><br><span class="line">opkg upgrade &lt;pkg&gt;</span><br><span class="line"></span><br><span class="line"># upgrade all pkg</span><br><span class="line">opkg list-upgradable | cut -f 1 -d &#39; &#39; | xargs opkg upgrade</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/01/01/ros-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/01/ros-config/" class="post-title-link" itemprop="url">RouterOS 配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-01 11:12:14" itemprop="dateCreated datePublished" datetime="2020-01-01T11:12:14+08:00">2020-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 15:56:43" itemprop="dateModified" datetime="2020-01-05T15:56:43+08:00">2020-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>ROS 命令行一个命令其实逻辑上会进入到对应的目录，只有最后一个执行文件才会真正执行，所以可以用这种操作简化命令输入。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入 system 其实进入了 system 目录， 之后进入 routerboard 目录，</span></span><br><span class="line">[admin@MikroTik] &gt; system</span><br><span class="line">[admin@MikroTik] /system&gt; routerboard</span><br><span class="line">[admin@MikroTik] /system routerboard&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 再输入最后的可执行命令，就执行了 <span class="built_in">print</span> 命令</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; print</span><br><span class="line">       routerboard: yes</span><br><span class="line">             model: RB4011iGS+</span><br><span class="line">     serial-number: B8FF0B97D030</span><br><span class="line">     firmware-type: al2</span><br><span class="line">  factory-firmware: 6.44.5</span><br><span class="line">  current-firmware: 6.44.6</span><br><span class="line">  upgrade-firmware: 6.44.6</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果想回到根目录，使用 /</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; /</span><br><span class="line">[admin@MikroTik] &gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在命令行中随时输入 ？ 会弹出命令和帮助</span></span><br><span class="line">[admin@MikroTik] /ip address&gt;</span><br><span class="line">IP addresses are given to router to access it remotely and to specify it as a gateway for other hosts/routers.</span><br><span class="line"></span><br><span class="line">.. -- go up to ip</span><br><span class="line">add -- Create a new item</span><br><span class="line">comment -- Set comment for items</span><br><span class="line">disable -- Disable items</span><br><span class="line">edit --</span><br><span class="line">enable -- Enable items</span><br><span class="line">export -- Print or save an export script that can be used to restore configuration</span><br><span class="line">find -- Find items by value</span><br><span class="line">get -- Gets value of item's property</span><br><span class="line">print -- Print values of item properties</span><br><span class="line">remove -- Remove item</span><br><span class="line">set -- Change item properties</span><br></pre></td></tr></table></figure>
+
+<h2 id="新机联网"><a href="#新机联网" class="headerlink" title="新机联网"></a>新机联网</h2><h3 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改默认的空密码为自定义的密码</span><br><span class="line">&#x2F;password</span><br><span class="line"></span><br><span class="line"># 关闭一些不用的服务 （ 我这边只保留了 ssh 和 winbox ）</span><br><span class="line">&#x2F;ip service disable telnet,ftp,www,api,api-ssl</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置公网"><a href="#配置公网" class="headerlink" title="配置公网"></a>配置公网</h3><p>由于目前都是光猫直接拨号，一般情况只需要配置IP即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 修改与光猫连接端口名称 </span><br><span class="line">&#x2F;interface ethernet set ether1 name&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 配置光猫内网IP 针对与光猫链接的端口</span><br><span class="line">&#x2F;ip address add address&#x3D;192.168.1.2&#x2F;24 interface&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 可以尝试 ping 光猫测试是否成功</span><br><span class="line">&#x2F;ping 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="内网配置"><a href="#内网配置" class="headerlink" title="内网配置"></a>内网配置</h3><p><strong>网络配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 新建网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 将接口加入网桥</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 添加默认网关</span><br><span class="line">&#x2F;ip route add gateway&#x3D;192.168.1.1</span><br><span class="line"></span><br><span class="line"># 出口 SNAT 转换</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;srcnat action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>DNS 和 DHCP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 配置 DNS 并且允许其他设备访问</span><br><span class="line">&#x2F;ip dns set servers&#x3D;1.1.1.1,114.114.114.114 allow-remote-requests&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 新建 IP 池</span><br><span class="line">&#x2F;ip pool add ranges&#x3D;10.10.10.100-10.10.10.200 name&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 建立 DHCP 服务器</span><br><span class="line">&#x2F;ip dhcp-server add name&#x3D;NET-DHCP interface&#x3D;bridge address-pool&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 配置 DHCP 网络</span><br><span class="line">&#x2F;ip dhcp-server network add address&#x3D;10.10.10.0&#x2F;24 dns-server&#x3D;10.10.10.1 gateway&#x3D;10.10.10.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h2><h3 id="内网-VLAN-配置"><a href="#内网-VLAN-配置" class="headerlink" title="内网 VLAN 配置"></a>内网 VLAN 配置</h3><p><strong>网桥</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 新建支持 VLAN 的网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge vlan-filtering&#x3D;no</span><br><span class="line"></span><br><span class="line"># 将端口加入网桥 并配置 VLAN</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上新建路由器使用的 VLAN</span><br><span class="line">&#x2F;interface vlan add interface&#x3D;bridge name&#x3D;VLAN-NET vlan-id&#x3D;10</span><br><span class="line"></span><br><span class="line"># 在 VLAN 上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;VLAN-NET</span><br></pre></td></tr></table></figure>
+
+<p><strong>VLAN</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 开启入口流量过滤 提高安全性</span><br><span class="line">&#x2F;interface bridge port </span><br><span class="line">set [f] ingress-filtering&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 设置网桥端口过滤 VLAN 标签模式</span><br><span class="line">&#x2F;interface bridge port</span><br><span class="line"># 允许所有类型帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-all</span><br><span class="line"># 只允许打了合适 VLAN 标签的帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-vlan-tagged</span><br><span class="line"># 允许未打标签和优先标签通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-untagged-and-priority-tagged</span><br><span class="line"></span><br><span class="line"># 配置网桥 VLAN</span><br><span class="line"># 针对 VLAN 10，sfp1 打标签，ether1,ether2 去掉标签</span><br><span class="line">add bridge&#x3D;bridge vlan-ids&#x3D;10 tagged&#x3D;sfp1 untagged&#x3D;ether1,ether2 </span><br><span class="line"># 如果网桥自身也要转发，需要配置网桥自身</span><br><span class="line">add bridge&#x3D;bridge tagged&#x3D;bridge,ether1 vlan-ids&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p><strong>查看现有的NAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[admin@MikroTik] &#x2F;ip firewall nat&gt; print</span><br><span class="line">Flags: X - disabled, I - invalid, D - dynamic</span><br><span class="line"> 0    ;;; defconf: masquerade</span><br><span class="line">      chain&#x3D;srcnat action&#x3D;masquerade out-interface-list&#x3D;WAN ipsec-policy&#x3D;out,none</span><br></pre></td></tr></table></figure>
+
+<p>目前是默认配置，对于所有 WAN 接口列表中的接口，都使用改变源IP的方式做NAT。</p>
+<h4 id="配置端口转发"><a href="#配置端口转发" class="headerlink" title="配置端口转发"></a><strong>配置端口转发</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将外网8000端口映射到内网服务器上的80端口</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;dstnat protocol&#x3D;tcp dst-port&#x3D;8000 in-interface&#x3D;ether5 action&#x3D;dst-nat to-addresses&#x3D;10.10.10.80 to-ports&#x3D;80</span><br></pre></td></tr></table></figure>
+
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 允许已经建立的链接通过</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input connection-state&#x3D;established,related in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br><span class="line"># 过滤掉所有的外部链接进入</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br></pre></td></tr></table></figure>
+
+<h3 id="WAN-负载均衡"><a href="#WAN-负载均衡" class="headerlink" title="WAN 负载均衡"></a>WAN 负载均衡</h3><p><strong>标记公网网卡进入的链接</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle</span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-DIRECT connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_DIRECT </span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-HOME connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建 PCC 规则</strong></p>
+<p><a href="https://wiki.mikrotik.com/wiki/Manual:PCC" target="_blank" rel="noopener">https://wiki.mikrotik.com/wiki/Manual:PCC</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 未标记的内网流量根据算法选择路由出去</span><br><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_DIRECT per-connection-classifier&#x3D;both-address:2&#x2F;0 </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_HOME per-connection-classifier&#x3D;both-address:2&#x2F;1</span><br></pre></td></tr></table></figure>
+
+<p><strong>建立路由标记</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_DIRECT in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_DIRECT</span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_HOME in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_HOME</span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_DIRECT action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_DIRECT     </span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_HOME action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建路由</strong></p>
+<p>策略路由 distance 默认为 0，之后创建备用的 distance 为 1 的路由备用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip route</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 routing-mark&#x3D;TO_WAN_DIRECT check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 routing-mark&#x3D;TO_WAN_HOME check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 distance&#x3D;1 check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 distance&#x3D;2 check-gateway&#x3D;ping</span><br></pre></td></tr></table></figure>
+
+<p><strong>SNAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall nat </span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-DIRECT action&#x3D;masquerade</span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-HOME action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>策略路由</strong></p>
+<p>防止策略路由导致的路由环路，处理 WAN 的局部网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall mangle</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.1.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.2.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/25/mac-java-dev-env/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/25/mac-java-dev-env/" class="post-title-link" itemprop="url">Mac 下的 Java 开发环境配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-25 20:54:43" itemprop="dateCreated datePublished" datetime="2019-11-25T20:54:43+08:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装-JAVA"><a href="#安装-JAVA" class="headerlink" title="安装 JAVA"></a>安装 JAVA</h2><p>直接安装最新版本 （ oracle jdk ），其他版本的可从官网下载安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install java</span><br></pre></td></tr></table></figure>
+
+<p>安装选定版本 （ openjdk ）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew&#x2F;cask-versions</span><br><span class="line">brew tap adoptopenjdk&#x2F;openjdk</span><br><span class="line">brew update</span><br><span class="line">brew cask install adoptopenjdk&#x2F;openjdk&#x2F;adoptopenjdk8 </span><br><span class="line"># 也可以安装 9&#x2F;10&#x2F;11&#x2F;12&#x2F;13 等</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装编译工具"><a href="#安装编译工具" class="headerlink" title="安装编译工具"></a>安装编译工具</h2><p>安装 Maven</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install maven</span><br></pre></td></tr></table></figure>
+
+<p>安装 Gradle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install gradle</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/22/letencrypt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/22/letencrypt/" class="post-title-link" itemprop="url">使用 Let‘s Encrypt 签发免费 SSL 证书</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-22 14:13:44" itemprop="dateCreated datePublished" datetime="2019-11-22T14:13:44+08:00">2019-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="添加-PPA-仓库"><a href="#添加-PPA-仓库" class="headerlink" title="添加 PPA 仓库"></a>添加 PPA 仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository universe</span><br><span class="line">sudo add-apt-repository ppa:certbot&#x2F;certbot</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install certbot</span><br></pre></td></tr></table></figure>
+
+<h2 id="签发证书"><a href="#签发证书" class="headerlink" title="签发证书"></a>签发证书</h2><p>使用以下命令签发证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly --manual --preferred-challenges dns -d gaobo.name</span><br></pre></td></tr></table></figure>
+
+<p><code>certonly --manual</code> 代表手动签发证书，不进行其他配置工作。</p>
+<p><code>--preferred-challenges dns</code> 代表验证方式使用 DNS 进行域名所有权的验证，也可以选择 <code>http</code> 方式进行验证。</p>
+<p><code>-d gaobo.name</code> 则是域名配置，后面可以多次使用 <code>-d DOMAIN</code> 来配置多个域名。</p>
+<h3 id="修改-DNS-解析"><a href="#修改-DNS-解析" class="headerlink" title="修改 DNS 解析"></a>修改 DNS 解析</h3><p>在执行上面的命令之后，会有几步相关的操作让你确认。之后会给你一段口令让你设置到 DNS 解析上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.gaobo.name with the following value:</span><br><span class="line"></span><br><span class="line">aO0HEtcVvHPPGY2a8JHEzjIXcDj8QD0kWb48Xmbh3g8</span><br><span class="line"></span><br><span class="line">Before continuing, verify the record is deployed.</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
+
+<p>按照提示设置好之后，按回车键即可。</p>
+<h3 id="成功签发"><a href="#成功签发" class="headerlink" title="成功签发"></a>成功签发</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">IMPORTANT NOTES:</span><br><span class="line"> - Congratulations! Your certificate and chain have been saved at:</span><br><span class="line">   &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;fullchain.pem</span><br><span class="line">   Your key file has been saved at:</span><br><span class="line">   &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;privkey.pem</span><br><span class="line">   Your cert will expire on 2020-02-20. To obtain a new or tweaked</span><br><span class="line">   version of this certificate in the future, simply run certbot</span><br><span class="line">   again. To non-interactively renew *all* of your certificates, run</span><br><span class="line">   &quot;certbot renew&quot;</span><br><span class="line"> - Your account credentials have been saved in your Certbot</span><br><span class="line">   configuration directory at &#x2F;etc&#x2F;letsencrypt. You should make a</span><br><span class="line">   secure backup of this folder now. This configuration directory will</span><br><span class="line">   also contain certificates and private keys obtained by Certbot so</span><br><span class="line">   making regular backups of this folder is ideal.</span><br><span class="line"> - If you like Certbot, please consider supporting our work by:</span><br><span class="line"></span><br><span class="line">   Donating to ISRG &#x2F; Let&#39;s Encrypt:   https:&#x2F;&#x2F;letsencrypt.org&#x2F;donate</span><br><span class="line">   Donating to EFF:                    https:&#x2F;&#x2F;eff.org&#x2F;donate-le</span><br></pre></td></tr></table></figure>
+
+<p>出现上面的提示之后就代表成功签发了，接下来只需要在 Web 服务器中进行配置即可。</p>
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><h3 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX</h3><p>如下所示，配置 <code>ssl_certificate</code> 和 <code>ssl_certificate_key</code> 即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name gaobo.name;</span><br><span class="line"></span><br><span class="line">    ssl_certificate &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;fullchain.pem;</span><br><span class="line">    ssl_certificate_key &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;privkey.pem;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        proxy_pass http:&#x2F;&#x2F;127.0.0.1:8002;</span><br><span class="line">        include proxy_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://certbot.eff.org/docs/using.html#certbot-commands" target="_blank" rel="noopener">https://certbot.eff.org/docs/using.html#certbot-commands</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/21/linux-secure-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/21/linux-secure-ssh/" class="post-title-link" itemprop="url">配置安全的 SSHD</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-21 16:12:37" itemprop="dateCreated datePublished" datetime="2019-11-21T16:12:37+08:00">2019-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑 <code>/etc/ssh/sshd_config</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 修改 SSH 端口为非常用端口</span><br><span class="line">Port 22222</span><br><span class="line"># 限制登陆过程的时间</span><br><span class="line">LoginGraceTime 5</span><br><span class="line"># 限制登陆过程重试次数</span><br><span class="line">MaxAuthTries 1</span><br><span class="line"></span><br><span class="line"># 禁止 Root 用户登陆</span><br><span class="line">PermitRootLogin no </span><br><span class="line"># 禁止空密码</span><br><span class="line">PermitEmptyPasswords no</span><br><span class="line"># 禁止密码登陆</span><br><span class="line">PasswordAuthentication no </span><br><span class="line"></span><br><span class="line"># 只允许特定用户登陆</span><br><span class="line">AllowUsers etbyapt</span><br></pre></td></tr></table></figure>
+
+<p>重启服务 <code>systemctl restart ssh</code></p>
+<h2 id="隐藏端口"><a href="#隐藏端口" class="headerlink" title="隐藏端口"></a>隐藏端口</h2><p>虽然我们能够更改端口号，和一些配置。但是，仍然有被扫描器扫描到的风险。如何能够让某个端口只在特定的情况下为我们自己开启，然后进行连接呢？我们可以使用 <code>knockd</code> 这个工具来完成这个工作。</p>
+<p>knockd 可以检测某些特定端口的特定访问，然后根据配置的规则触发一些事件。事件触发之后就可以通过命令开启某些特定的端口，然后我们就可以进行连接了。</p>
+<h3 id="安装配置-knockd"><a href="#安装配置-knockd" class="headerlink" title="安装配置 knockd"></a>安装配置 knockd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install knockd</span><br></pre></td></tr></table></figure>
+
+<p>编辑 <code>/etc/knockd.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[options]</span><br><span class="line">    LogFile       &#x3D; &#x2F;var&#x2F;log&#x2F;knockd.log</span><br><span class="line">    Interface     &#x3D; enp5s0  # 这里使用自己的网卡配置</span><br><span class="line"></span><br><span class="line">[opencloseSSH]</span><br><span class="line">    sequence      &#x3D; 7000,8000,9000</span><br><span class="line">    seq_timeout   &#x3D; 5</span><br><span class="line">    tcpflags      &#x3D; syn</span><br><span class="line">    start_command &#x3D; &#x2F;sbin&#x2F;iptables -A INPUT -s %IP% -p tcp --dport 22 -j ACCEPT</span><br><span class="line">    cmd_timeout   &#x3D; 30</span><br><span class="line">    stop_command  &#x3D; &#x2F;sbin&#x2F;iptables -D INPUT -s %IP% -p tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>以上配置详解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sequence 配置端口号序列 可以使用 22:udp 代表udp的端口号</span><br><span class="line">seq_timeout 连续访问上方序列的时间限制</span><br><span class="line">tcpflags 包的 TCP 标志</span><br><span class="line">start_command 完成序列之后执行的命令</span><br><span class="line">cmd_timeout 结束命令的时间 </span><br><span class="line">end_command 结束之后执行的命令 </span><br><span class="line">由于防火墙对已经链接成功的包不进行过滤，所以链接之后再关闭包仍然能够通过</span><br></pre></td></tr></table></figure>
+
+<p>启动 knockd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable knockd.service</span><br><span class="line">systemctl start knockd.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试-knockd"><a href="#测试-knockd" class="headerlink" title="测试 knockd"></a>测试 knockd</h3><p>测试需要安装 knock </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install knockd # 客户端和服务器在一个包里面</span><br><span class="line">brew install knock</span><br></pre></td></tr></table></figure>
+
+<p>测试上面配置文件中的端口序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ knock  -v &#123;IP&#125; 7000 8000 9000</span><br><span class="line"></span><br><span class="line">hitting tcp 10.10.10.100:7000</span><br><span class="line">hitting tcp 10.10.10.100:8000</span><br><span class="line">hitting tcp 10.10.10.100:9000</span><br></pre></td></tr></table></figure>
+
+<p>查看日志文件 <code>/var/log/knockd.log</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[2019-11-21 20:32] 10.10.10.133: opencloseSSH: OPEN SESAME</span><br><span class="line">[2019-11-21 20:32] opencloseSSH: running command: &#x2F;sbin&#x2F;iptables -A INPUT -s 10.10.10.133 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">[2019-11-21 20:32] 10.10.10.133: opencloseSSH: command timeout</span><br><span class="line">[2019-11-21 20:32] opencloseSSH: running command: &#x2F;sbin&#x2F;iptables -D INPUT -s 10.10.10.133 -p tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>以上说明配置成功了，之后每次 SSH 之前需要先使用 knock 命令敲门之后再进行连接。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li><p>knockd 所配置的敲门序列需要搭配 iptables 的包过滤才能真正发挥效果。</p>
+</li>
+<li><p>knockd 的敲门模式不只是可以用来打开端口，也可以执行其他任何操作。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ibm.com/developerworks/cn/aix/library/au-sshlocks/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/aix/library/au-sshlocks/index.html</a></p>
+<p><a href="http://linux.vbird.org/linux_security/knockd.php" target="_blank" rel="noopener">http://linux.vbird.org/linux_security/knockd.php</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/21/linux-secure-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/21/linux-secure-config/" class="post-title-link" itemprop="url">Linux 服务器安全配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-21 15:51:23" itemprop="dateCreated datePublished" datetime="2019-11-21T15:51:23+08:00">2019-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><h3 id="SSH-配置"><a href="#SSH-配置" class="headerlink" title="SSH 配置"></a>SSH 配置</h3><p>针对 SSH 连接进行一些特殊的配置，防止外部暴力破解等。</p>
+<p><a href="http://blog.etby.org/2019/11/21/linux-secure-ssh/">http://blog.etby.org/2019/11/21/linux-secure-ssh/</a></p>
+<h2 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h2><p>待续……</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/15/beancount-env/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/15/beancount-env/" class="post-title-link" itemprop="url">BeanCount 记账环境</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-15 15:12:15" itemprop="dateCreated datePublished" datetime="2019-11-15T15:12:15+08:00">2019-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>beancount 是一种复式记账的语言，可以将交易记录在文本文件中，可以做很多的脚本处理，还有 Web 界面可以查看账目。</p>
+<h3 id="复式记账"><a href="#复式记账" class="headerlink" title="复式记账"></a>复式记账</h3><p>基于会计恒等式产生的记账形式，每笔交易的结果至少被记录在一个借方和一个贷方的账户，且该笔交易的借贷双方总额相等，即 ”有借必有贷，借贷必相等“ 。</p>
+<blockquote>
+<p>资产 = 负债 + 所有者权益</p>
+<p>资产 = 负债 + 所有者权益 + （收入 - 费用）</p>
+</blockquote>
+<p>复式记账可以做到对资金的强掌控，每一笔资金的来源和去向一清二楚。</p>
+<h2 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 本文所有 python 环境都是 python3</span><br><span class="line">pip3 install virtualenv</span><br><span class="line"></span><br><span class="line"># 进入自己想放置环境配置的地方</span><br><span class="line">python -m venv BEANCOUNT</span><br><span class="line">source BEANCOUNT&#x2F;bin&#x2F;active</span><br><span class="line">pip install beancount</span><br><span class="line">pip install fava</span><br></pre></td></tr></table></figure>
+
+<p>安装完成即可开始记账，如何记账可以参考文章最下面的几篇博客。</p>
+<h2 id="网页访问"><a href="#网页访问" class="headerlink" title="网页访问"></a>网页访问</h2><p>我是用 Docker 部署 fava 来使用的，一般小笔的交易直接在 fava 的编辑器中打开账本进行记账。</p>
+<h4 id="建立部署文件夹"><a href="#建立部署文件夹" class="headerlink" title="建立部署文件夹"></a>建立部署文件夹</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 进入账本文件夹中执行</span><br><span class="line">mkdir deploy &amp;&amp; cd deploy</span><br></pre></td></tr></table></figure>
+
+<h4 id="记录依赖"><a href="#记录依赖" class="headerlink" title="记录依赖"></a>记录依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入 venv</span><br><span class="line">source BEANCOUNT&#x2F;bin&#x2F;active</span><br><span class="line"># 将正确的依赖配置记录下来</span><br><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h4><p>创建 Dockerfile 文件，然后输入以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM python</span><br><span class="line"></span><br><span class="line">COPY requirements.txt .&#x2F;</span><br><span class="line">RUN pip install --no-cache-dir -r requirements.txt</span><br><span class="line"></span><br><span class="line">ENV FAVA_HOST&#x3D;0.0.0.0</span><br><span class="line">VOLUME &#x2F;data</span><br><span class="line"></span><br><span class="line">CMD [&quot;fava&quot;, &quot;&#x2F;data&#x2F;main.bean&quot;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h4><p>创建 docker-compose.yml 文件，输入以下内容（具体配置可按自己的需求改变）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  fava:</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;127.0.0.1:8888:5000&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - ..:&#x2F;data</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>挂载的 volumes 中的 .. 是因为上面这些文件都在账本目录下的 deploy 文件夹中，.. 正好是账本文件夹。</li>
+<li>主账本名称应该为 main.bean</li>
+</ul>
+<h4 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d --buil</span><br></pre></td></tr></table></figure>
+
+<p>之后可以访问： <a href="http://localhost:8888/" target="_blank" rel="noopener">http://localhost:8888/</a> 查看账本是否部署成功</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://wzyboy.im/post/1063.html" target="_blank" rel="noopener">https://wzyboy.im/post/1063.html</a></li>
+<li><a href="https://yuchi.me/post/beancount-intro/" target="_blank" rel="noopener">https://yuchi.me/post/beancount-intro/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/02/mac-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/02/mac-init/" class="post-title-link" itemprop="url">Mac 初始化配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-02 16:52:32" itemprop="dateCreated datePublished" datetime="2019-11-02T16:52:32+08:00">2019-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 16:53:58" itemprop="dateModified" datetime="2019-12-30T16:53:58+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础软件"><a href="#基础软件" class="headerlink" title="基础软件"></a>基础软件</h2><h3 id="Brew"><a href="#Brew" class="headerlink" title="Brew"></a>Brew</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Iterm2"><a href="#Iterm2" class="headerlink" title="Iterm2"></a>Iterm2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install iterm2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a>Oh My Zsh</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h2><h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install google-chrome</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dropbox"><a href="#Dropbox" class="headerlink" title="Dropbox"></a>Dropbox</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install dropbox</span><br></pre></td></tr></table></figure>
+
+<h3 id="Alfred4"><a href="#Alfred4" class="headerlink" title="Alfred4"></a>Alfred4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install alfred</span><br></pre></td></tr></table></figure>
+
+<h3 id="1Password"><a href="#1Password" class="headerlink" title="1Password"></a>1Password</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install 1password</span><br></pre></td></tr></table></figure>
+
+<h3 id="Joplin"><a href="#Joplin" class="headerlink" title="Joplin"></a>Joplin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install joplin</span><br></pre></td></tr></table></figure>
+
+<h3 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install typora</span><br></pre></td></tr></table></figure>
+
+<h3 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install telegram-desktop</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="通用开发环境"><a href="#通用开发环境" class="headerlink" title="通用开发环境"></a>通用开发环境</h2><h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install visual-studio-code</span><br></pre></td></tr></table></figure>
+
+<h3 id="JetBrains"><a href="#JetBrains" class="headerlink" title="JetBrains"></a>JetBrains</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install jetbrains-toolbox</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="Anisble"><a href="#Anisble" class="headerlink" title="Anisble"></a>Anisble</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ansible</span><br></pre></td></tr></table></figure>
+
+<h3 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git Flow"></a>Git Flow</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git-flow-avh</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端开发环境"><a href="#前端开发环境" class="headerlink" title="前端开发环境"></a>前端开发环境</h2><h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install nvm</span><br><span class="line"></span><br><span class="line">nvm install node</span><br></pre></td></tr></table></figure>
+
+<h2 id="博客环境"><a href="#博客环境" class="headerlink" title="博客环境"></a>博客环境</h2><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/08/10/linux-nas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/10/linux-nas/" class="post-title-link" itemprop="url">在 Linux 服务器上搭建 NAS 服务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-10 14:25:42" itemprop="dateCreated datePublished" datetime="2019-08-10T14:25:42+08:00">2019-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>ubuntu 直接使用包管理器安装，其他平台类似。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<p>创建专用目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;data&#x2F;nas-root</span><br><span class="line">chown nobody:nogroup &#x2F;data&#x2F;nas-root</span><br><span class="line">chmod 777 &#x2F;data&#x2F;nas-root</span><br></pre></td></tr></table></figure>
+
+<p>导出文件配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;exports</span><br><span class="line"></span><br><span class="line">&#x2F;data&#x2F;nas-root 10.10.10.0&#x2F;24(rw,sync,no_subtree_check)</span><br></pre></td></tr></table></figure>
+
+<p>使配置生效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exportfs -a</span><br><span class="line">systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>查看服务器共享文件状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">showmount -e 10.10.10.100</span><br><span class="line"></span><br><span class="line">Exports list on 10.10.10.100:</span><br><span class="line">&#x2F;data&#x2F;nas-root                      10.10.10.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>我这边是在 Mac 下挂载，Linux 平台只需要改变路径就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -o resvport -t nfs 10.10.10.100:&#x2F;data&#x2F;nas-root &#x2F;Volumes&#x2F;NAS</span><br></pre></td></tr></table></figure>
+
+<h2 id="SAMBA"><a href="#SAMBA" class="headerlink" title="SAMBA"></a>SAMBA</h2><h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><p>Ubuntu 使用包管理器安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install samba</span><br></pre></td></tr></table></figure>
+
+<p>增加 SAMBA 账户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbpasswd -a etby</span><br></pre></td></tr></table></figure>
+
+<p>编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;samba&#x2F;smb.conf</span><br><span class="line"></span><br><span class="line">[NAS]</span><br><span class="line">comment &#x3D; NAS Directory</span><br><span class="line">browseable &#x3D; yes</span><br><span class="line">path &#x3D; &#x2F;data&#x2F;nas-root</span><br><span class="line">create mask &#x3D; 0777</span><br><span class="line">directory mask &#x3D; 0777</span><br><span class="line">valid users &#x3D; etby</span><br><span class="line">force user &#x3D; nobody</span><br><span class="line">force group &#x3D; nogroup</span><br><span class="line">public &#x3D; yes </span><br><span class="line">available &#x3D; yes </span><br><span class="line">writable &#x3D; yes</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/03/27/linux-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/27/linux-init/" class="post-title-link" itemprop="url">Linux 初始化配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-27 23:13:12" itemprop="dateCreated datePublished" datetime="2019-03-27T23:13:12+08:00">2019-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>每次<code>Linux</code>初始化配置都比较麻烦，所以在此记录一下，以后方便配置。我主要是用 <code>Ubuntu</code> ，所以以下是基于它的，其他系统类似。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="SUDO-免密码"><a href="#SUDO-免密码" class="headerlink" title="SUDO 免密码"></a>SUDO 免密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">etby	ALL&#x3D;(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载-SNAP"><a href="#卸载-SNAP" class="headerlink" title="卸载 SNAP"></a>卸载 SNAP</h3><p>针对主要用来做母鸡的服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt autoremove --purge snapd</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><h3 id="OH-MY-ZSH"><a href="#OH-MY-ZSH" class="headerlink" title="OH MY ZSH"></a>OH MY ZSH</h3><p><code>OH MY ZSH</code> 以及它的工具链用的很熟练了，感觉非常舒服。</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 安装本体</span><br><span class="line">sudo apt-get install zsh</span><br><span class="line">sh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;</span><br><span class="line"></span><br><span class="line"># 安装插件</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;zsh-users&#x2F;zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~&#x2F;.oh-my-zsh&#x2F;custom&#125;&#x2F;plugins&#x2F;zsh-syntax-highlighting</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;zsh-users&#x2F;zsh-autosuggestions $&#123;ZSH_CUSTOM:-~&#x2F;.oh-my-zsh&#x2F;custom&#125;&#x2F;plugins&#x2F;zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">plugins&#x3D;(</span><br><span class="line"># Common</span><br><span class="line">  git</span><br><span class="line">  zsh-syntax-highlighting</span><br><span class="line">  zsh-autosuggestions</span><br><span class="line">  </span><br><span class="line"># Develop</span><br><span class="line">  git-flow-avh # 需要安装 git-flow-avh # sudo apt-get install git-flow</span><br><span class="line">  </span><br><span class="line"># Server</span><br><span class="line">  docker</span><br><span class="line">  docker-compose</span><br><span class="line">  kubectl</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 添加驱动仓库</span><br><span class="line">sudo add-apt-repository ppa:graphics-drivers&#x2F;ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line"># 安装 Ubuntu 驱动工具</span><br><span class="line">sudo apt-get install ubuntu-drivers-common</span><br><span class="line"># 查看设备以及推荐</span><br><span class="line">sudo ubuntu-drivers devices</span><br><span class="line"># 按推荐的显卡驱动安装</span><br><span class="line">sudo apt-get install nvidia-driver-418</span><br><span class="line"></span><br><span class="line"># 重启</span><br><span class="line">sudo reboot</span><br><span class="line"># 查看安装情况</span><br><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
