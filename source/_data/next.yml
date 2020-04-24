@@ -14,3 +14,14 @@ menu:
 # Close Motion
 motion:
   enable: false
+
+# Schemes
+#scheme: Muse
+#scheme: Mist
+#scheme: Pisces
+scheme: Gemini
+
+sidebar:
+  # Sidebar Position.
+  #position: left
+  position: right
