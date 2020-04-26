@@ -180,6 +180,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/08/10/linux-nas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/10/linux-nas/" class="post-title-link" itemprop="url">在 Linux 服务器上搭建 NAS 服务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-10 14:25:42" itemprop="dateCreated datePublished" datetime="2019-08-10T14:25:42+08:00">2019-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>ubuntu 直接使用包管理器安装，其他平台类似。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<p>创建专用目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;data&#x2F;nas-root</span><br><span class="line">chown nobody:nogroup &#x2F;data&#x2F;nas-root</span><br><span class="line">chmod 777 &#x2F;data&#x2F;nas-root</span><br></pre></td></tr></table></figure>
+
+<p>导出文件配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;exports</span><br><span class="line"></span><br><span class="line">&#x2F;data&#x2F;nas-root 10.10.10.0&#x2F;24(rw,sync,no_subtree_check)</span><br></pre></td></tr></table></figure>
+
+<p>使配置生效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exportfs -a</span><br><span class="line">systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>查看服务器共享文件状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">showmount -e 10.10.10.100</span><br><span class="line"></span><br><span class="line">Exports list on 10.10.10.100:</span><br><span class="line">&#x2F;data&#x2F;nas-root                      10.10.10.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>我这边是在 Mac 下挂载，Linux 平台只需要改变路径就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -o resvport -t nfs 10.10.10.100:&#x2F;data&#x2F;nas-root &#x2F;Volumes&#x2F;NAS</span><br></pre></td></tr></table></figure>
+
+<h2 id="SAMBA"><a href="#SAMBA" class="headerlink" title="SAMBA"></a>SAMBA</h2><h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><p>Ubuntu 使用包管理器安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install samba</span><br></pre></td></tr></table></figure>
+
+<p>增加 SAMBA 账户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbpasswd -a etby</span><br></pre></td></tr></table></figure>
+
+<p>编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;samba&#x2F;smb.conf</span><br><span class="line"></span><br><span class="line">[NAS]</span><br><span class="line">comment &#x3D; NAS Directory</span><br><span class="line">browseable &#x3D; yes</span><br><span class="line">path &#x3D; &#x2F;data&#x2F;nas-root</span><br><span class="line">create mask &#x3D; 0777</span><br><span class="line">directory mask &#x3D; 0777</span><br><span class="line">valid users &#x3D; etby</span><br><span class="line">force user &#x3D; nobody</span><br><span class="line">force group &#x3D; nogroup</span><br><span class="line">public &#x3D; yes </span><br><span class="line">available &#x3D; yes </span><br><span class="line">writable &#x3D; yes</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/03/27/linux-init/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -848,7 +939,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -861,7 +952,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

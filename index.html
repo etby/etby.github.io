@@ -180,6 +180,120 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/26/k8s-release-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/26/k8s-release-app/" class="post-title-link" itemprop="url">在 K8S 集群上发布应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-26 22:23:42 / Modified: 23:53:34" itemprop="dateCreated datePublished" datetime="2020-04-26T22:23:42+08:00">2020-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="应用介绍"><a href="#应用介绍" class="headerlink" title="应用介绍"></a>应用介绍</h2><p>目标是将公司网站发布到集群中。前期准备：域名备案，编写代码与打包镜像。由于目前还是简易的纯前端展示页面，以及基础设施还不太完善，我就直接将镜像放到 DockerHub 上了。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p><a href="https://github.com/Retirwer/www.retirwer.com" target="_blank" rel="noopener">https://github.com/Retirwer/www.retirwer.com</a></p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p><a href="https://hub.docker.com/repository/docker/retirwer/www.retirwer.com" target="_blank" rel="noopener">https://hub.docker.com/repository/docker/retirwer/www.retirwer.com</a></p>
+<h2 id="集群环境"><a href="#集群环境" class="headerlink" title="集群环境"></a>集群环境</h2><h3 id="CertManager"><a href="#CertManager" class="headerlink" title="CertManager"></a>CertManager</h3><p>用来自动申请 HTTPS 证书。</p>
+<h3 id="Helm"><a href="#Helm" class="headerlink" title="Helm"></a>Helm</h3><p>用来进行 Kubernetes 应用的管理。</p>
+<h2 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h2><h3 id="创建-Helm-Chars"><a href="#创建-Helm-Chars" class="headerlink" title="创建 Helm Chars"></a>创建 Helm Chars</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm create www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<p>由于基本模板对于简单的展示站够用，目前只需要修改 <code>Chart.yaml</code> 和 <code>values.yaml</code> 文件即可。</p>
+<h3 id="Chart-yaml"><a href="#Chart-yaml" class="headerlink" title="Chart.yaml"></a>Chart.yaml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v2</span><br><span class="line">name: www.retirwer.com</span><br><span class="line">description: Retirwer Technology Co., Ltd Official Web Site.</span><br><span class="line">type: application</span><br><span class="line">version: 0.1.0</span><br><span class="line">appVersion: 0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="values-yaml"><a href="#values-yaml" class="headerlink" title="values.yaml"></a>values.yaml</h3><p>修改镜像，版本则和 <code>appVersion</code> 相同，后续更改版本只需要修改 <code>Chart.yaml</code> 中的 <code>appVersion</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image:</span><br><span class="line">  repository: retirwer&#x2F;www.retirwer.com</span><br><span class="line">  pullPolicy: IfNotPresen</span><br></pre></td></tr></table></figure>
+
+<p>配置 <code>Ingress</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ingress:</span><br><span class="line">  enabled: true</span><br><span class="line">  annotations:</span><br><span class="line">    # 使用 Nginx-Ingress 的配置</span><br><span class="line">    kubernetes.io&#x2F;ingress.class: nginx</span><br><span class="line">    # 根据自己的 cert-manager 的配置修改</span><br><span class="line">    cert-manager.io&#x2F;cluster-issuer: letsencrypt-prod</span><br><span class="line">  hosts:</span><br><span class="line">    - host: www.retirwer.com</span><br><span class="line">    	# 只配置根目录</span><br><span class="line">      paths: [&#x2F;]</span><br><span class="line">  tls:</span><br><span class="line">   - secretName: www.retirwer.com-tls</span><br><span class="line">     hosts:</span><br><span class="line">       - www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>对于其他用不到的配置模版可以删掉，也可以不启用。</li>
+</ul>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>一般必须指定命名空间，如果不指定则使用当前命名空间。</p>
+<h3 id="确认发布配置"><a href="#确认发布配置" class="headerlink" title="确认发布配置"></a>确认发布配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --debug --dry-run</span><br></pre></td></tr></table></figure>
+
+<h3 id="首次发布"><a href="#首次发布" class="headerlink" title="首次发布"></a>首次发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新发布"><a href="#更新发布" class="headerlink" title="更新发布"></a>更新发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm upgrade &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载发布"><a href="#卸载发布" class="headerlink" title="卸载发布"></a>卸载发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall &lt;release-name&gt; --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/24/migrat-k8s-1-17-to-1-18/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,97 +1122,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/08/10/linux-nas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Etby">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Etby's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/10/linux-nas/" class="post-title-link" itemprop="url">在 Linux 服务器上搭建 NAS 服务</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-10 14:25:42" itemprop="dateCreated datePublished" datetime="2019-08-10T14:25:42+08:00">2019-08-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-30 13:36:12" itemprop="dateModified" datetime="2019-12-30T13:36:12+08:00">2019-12-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>ubuntu 直接使用包管理器安装，其他平台类似。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
-
-<p>创建专用目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;data&#x2F;nas-root</span><br><span class="line">chown nobody:nogroup &#x2F;data&#x2F;nas-root</span><br><span class="line">chmod 777 &#x2F;data&#x2F;nas-root</span><br></pre></td></tr></table></figure>
-
-<p>导出文件配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;exports</span><br><span class="line"></span><br><span class="line">&#x2F;data&#x2F;nas-root 10.10.10.0&#x2F;24(rw,sync,no_subtree_check)</span><br></pre></td></tr></table></figure>
-
-<p>使配置生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exportfs -a</span><br><span class="line">systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
-
-<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>查看服务器共享文件状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">showmount -e 10.10.10.100</span><br><span class="line"></span><br><span class="line">Exports list on 10.10.10.100:</span><br><span class="line">&#x2F;data&#x2F;nas-root                      10.10.10.0&#x2F;24</span><br></pre></td></tr></table></figure>
-
-<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>我这边是在 Mac 下挂载，Linux 平台只需要改变路径就好。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -o resvport -t nfs 10.10.10.100:&#x2F;data&#x2F;nas-root &#x2F;Volumes&#x2F;NAS</span><br></pre></td></tr></table></figure>
-
-<h2 id="SAMBA"><a href="#SAMBA" class="headerlink" title="SAMBA"></a>SAMBA</h2><h3 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h3><p>Ubuntu 使用包管理器安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install samba</span><br></pre></td></tr></table></figure>
-
-<p>增加 SAMBA 账户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbpasswd -a etby</span><br></pre></td></tr></table></figure>
-
-<p>编辑配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;samba&#x2F;smb.conf</span><br><span class="line"></span><br><span class="line">[NAS]</span><br><span class="line">comment &#x3D; NAS Directory</span><br><span class="line">browseable &#x3D; yes</span><br><span class="line">path &#x3D; &#x2F;data&#x2F;nas-root</span><br><span class="line">create mask &#x3D; 0777</span><br><span class="line">directory mask &#x3D; 0777</span><br><span class="line">valid users &#x3D; etby</span><br><span class="line">force user &#x3D; nobody</span><br><span class="line">force group &#x3D; nogroup</span><br><span class="line">public &#x3D; yes </span><br><span class="line">available &#x3D; yes </span><br><span class="line">writable &#x3D; yes</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1169,7 +1192,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1182,7 +1205,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
