@@ -203,10 +203,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-28 16:44:46 / Modified: 16:53:10" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
+              <time title="Created: 2020-04-28 16:44:46" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-01 17:39:06" itemprop="dateModified" datetime="2020-05-01T17:39:06+08:00">2020-05-01</time>
+              </span>
 
           
 
@@ -270,6 +276,13 @@
 
 <p>上传</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<h2 id="Charts-管理"><a href="#Charts-管理" class="headerlink" title="Charts 管理"></a>Charts 管理</h2><h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add --username&#x3D;&lt;username&gt; --password&#x3D;&lt;password&gt; &lt;repo-name&gt; https:&#x2F;&#x2F;&lt;harbor-domain&gt;&#x2F;chartrepo&#x2F;&lt;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-PUSH-插件"><a href="#安装-PUSH-插件" class="headerlink" title="安装 PUSH 插件"></a>安装 PUSH 插件</h3><p>默认的 Helm 没有推送功能，需要安装插件才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https:&#x2F;&#x2F;github.com&#x2F;chartmuseum&#x2F;helm-push</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传-Charts"><a href="#上传-Charts" class="headerlink" title="上传 Charts"></a>上传 Charts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm push &lt;charts-dir&gt; &lt;repo&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://github.com/goharbor/harbor-helm" target="_blank" rel="noopener">https://github.com/goharbor/harbor-helm</a></li>

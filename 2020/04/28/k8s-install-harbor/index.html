@@ -53,10 +53,10 @@
 <meta property="og:site_name" content="Etby&#39;s Blog">
 <meta property="og:description" content="HarborHarbor 是一个企业级 Registry 服务器，可以用来存放 Docker 镜像，还可以存放 Helm Chats。 ProxyNginx 代理，用来转发请求。用 Ingress 之后此模块不会开启。 Registry负责存储 Docker 镜像，内核是 Docker 官方的 Registry。 由于 Registry 没有权限认证，所有 Harbor 对每次请求都会进行鉴权，通">
 <meta property="article:published_time" content="2020-04-28T08:44:46.000Z">
-<meta property="article:modified_time" content="2020-04-28T08:53:10.062Z">
+<meta property="article:modified_time" content="2020-05-01T09:39:06.217Z">
 <meta property="article:author" content="Etby">
-<meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="Harbor">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -210,10 +210,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-28 16:44:46 / Modified: 16:53:10" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
+              <time title="Created: 2020-04-28 16:44:46" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-01 17:39:06" itemprop="dateModified" datetime="2020-05-01T17:39:06+08:00">2020-05-01</time>
+              </span>
 
           
 
@@ -278,6 +284,13 @@
 <p>上传</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
 
+<h2 id="Charts-管理"><a href="#Charts-管理" class="headerlink" title="Charts 管理"></a>Charts 管理</h2><h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add --username&#x3D;&lt;username&gt; --password&#x3D;&lt;password&gt; &lt;repo-name&gt; https:&#x2F;&#x2F;&lt;harbor-domain&gt;&#x2F;chartrepo&#x2F;&lt;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-PUSH-插件"><a href="#安装-PUSH-插件" class="headerlink" title="安装 PUSH 插件"></a>安装 PUSH 插件</h3><p>默认的 Helm 没有推送功能，需要安装插件才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https:&#x2F;&#x2F;github.com&#x2F;chartmuseum&#x2F;helm-push</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传-Charts"><a href="#上传-Charts" class="headerlink" title="上传 Charts"></a>上传 Charts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm push &lt;charts-dir&gt; &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://github.com/goharbor/harbor-helm" target="_blank" rel="noopener">https://github.com/goharbor/harbor-helm</a></li>
 <li><a href="https://www.qikqiak.com/post/harbor-quick-install/" target="_blank" rel="noopener">https://www.qikqiak.com/post/harbor-quick-install/</a></li>
@@ -292,8 +305,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
               <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
               <a href="/tags/Harbor/" rel="tag"># Harbor</a>
               <a href="/tags/Docker/" rel="tag"># Docker</a>
           </div>
@@ -367,7 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Harbor"><span class="nav-number">1.</span> <span class="nav-text">Harbor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Registry"><span class="nav-number">1.2.</span> <span class="nav-text">Registry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core"><span class="nav-number">1.3.</span> <span class="nav-text">Core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他组件"><span class="nav-number">1.4.</span> <span class="nav-text">其他组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">3.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Harbor"><span class="nav-number">1.</span> <span class="nav-text">Harbor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Registry"><span class="nav-number">1.2.</span> <span class="nav-text">Registry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core"><span class="nav-number">1.3.</span> <span class="nav-text">Core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他组件"><span class="nav-number">1.4.</span> <span class="nav-text">其他组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">3.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Charts-管理"><span class="nav-number">5.</span> <span class="nav-text">Charts 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加仓库"><span class="nav-number">5.1.</span> <span class="nav-text">添加仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-PUSH-插件"><span class="nav-number">5.2.</span> <span class="nav-text">安装 PUSH 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传-Charts"><span class="nav-number">5.3.</span> <span class="nav-text">上传 Charts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
