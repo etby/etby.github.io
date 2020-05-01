@@ -180,6 +180,28 @@ docker tag alpine:3.9 register.harbor.com/library/alpine:3.9
 docker push register.harbor.com/library/alpine:3.9
 ```
 
+## Charts 管理
+
+### 添加仓库
+
+```
+helm repo add --username=<username> --password=<password> <repo-name> https://<harbor-domain>/chartrepo/<project>
+```
+
+### 安装 PUSH 插件
+
+默认的 Helm 没有推送功能，需要安装插件才可以。
+
+```
+helm plugin install https://github.com/chartmuseum/helm-push
+```
+
+### 上传 Charts
+
+```
+helm push <charts-dir> <repo>
+```
+
 ## 参考
 
 - https://github.com/goharbor/harbor-helm
