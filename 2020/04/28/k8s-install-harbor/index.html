@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="HarborHarbor 是一个企业级 Registry 服务器，可以用来存放 Docker 镜像，还可以存放 Helm Chats。 ProxyNginx 代理，用来转发请求。用 Ingress 之后此模块不会开启。 Registry负责存储 Docker 镜像，内核是 Docker 官方的 Registry。 由于 Registry 没有权限认证，所有 Harbor 对每次请求都会进行鉴权，通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Helm 在 Kubernetes 集群中安装 Harbor">
+<meta property="og:url" content="http://blog.etby.org/2020/04/28/k8s-install-harbor/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="HarborHarbor 是一个企业级 Registry 服务器，可以用来存放 Docker 镜像，还可以存放 Helm Chats。 ProxyNginx 代理，用来转发请求。用 Ingress 之后此模块不会开启。 Registry负责存储 Docker 镜像，内核是 Docker 官方的 Registry。 由于 Registry 没有权限认证，所有 Harbor 对每次请求都会进行鉴权，通">
+<meta property="article:published_time" content="2020-04-28T08:44:46.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Harbor">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2020/04/28/k8s-install-harbor/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>使用 Helm 在 Kubernetes 集群中安装 Harbor | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/28/k8s-install-harbor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Helm 在 Kubernetes 集群中安装 Harbor
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-28 16:44:46" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Harbor"><a href="#Harbor" class="headerlink" title="Harbor"></a>Harbor</h2><p>Harbor 是一个企业级 Registry 服务器，可以用来存放 Docker 镜像，还可以存放 Helm Chats。</p>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p>Nginx 代理，用来转发请求。用 Ingress 之后此模块不会开启。</p>
+<h3 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h3><p>负责存储 Docker 镜像，内核是 Docker 官方的 Registry。</p>
+<p>由于 Registry 没有权限认证，所有 Harbor 对每次请求都会进行鉴权，通过之后再由 Registry 处理。</p>
+<h3 id="Core"><a href="#Core" class="headerlink" title="Core"></a>Core</h3><p>Harbor的核心功能，主要包含以下功能：</p>
+<ul>
+<li>认证与授权</li>
+<li>配置管理</li>
+<li>元数据管理</li>
+<li>内容管理与分发</li>
+</ul>
+<h3 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h3><p><strong>Chart Museum</strong>：Helm Chart 仓库。</p>
+<p><strong>Job Services</strong>：处理异步计算请求。</p>
+<p><strong>Log collector</strong>：日志收集。</p>
+<p><strong>Notary</strong>：信任中心，详情：<a href="https://github.com/theupdateframework/notary" target="_blank" rel="noopener">https://github.com/theupdateframework/notary</a> 。</p>
+<p><strong>Web Portal</strong>：图形化的用户页面，用户通过这个管理 Registry。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>添加仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add harbor https:&#x2F;&#x2F;helm.goharbor.io</span><br><span class="line">helm repo add bitnami https:&#x2F;&#x2F;charts.bitnami.com&#x2F;bitnami</span><br></pre></td></tr></table></figure>
+
+<p>更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>获取配置条目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm inspect values harbor&#x2F;harbor</span><br></pre></td></tr></table></figure>
+
+<p>可以保存为文件，后续参考方便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm inspect values harbor&#x2F;harbor &gt; origin.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"># 密码</span><br><span class="line">harborAdminPassword: &quot;Harbor12345&quot;</span><br><span class="line"># 用于加密的一个 secret key，必须是一个16位的字符串</span><br><span class="line">secretKey: &quot;not-a-secure-key&quot;</span><br><span class="line"></span><br><span class="line"># 对外暴露配置</span><br><span class="line">expose:</span><br><span class="line">  type: ingress</span><br><span class="line">  tls:</span><br><span class="line">    enabled: true</span><br><span class="line">    secretName: harbor-tls</span><br><span class="line">    notarySecretName: harbor-tls</span><br><span class="line">  ingress:</span><br><span class="line">    hosts:</span><br><span class="line">      core: registry.harbor.com</span><br><span class="line">      notary: notary.harbor.com</span><br><span class="line">    annotations:</span><br><span class="line">      kubernetes.io&#x2F;ingress.class: &quot;nginx&quot;</span><br><span class="line"></span><br><span class="line">      ingress.kubernetes.io&#x2F;ssl-redirect: &quot;true&quot;</span><br><span class="line">      nginx.ingress.kubernetes.io&#x2F;ssl-redirect: &quot;true&quot;</span><br><span class="line"></span><br><span class="line">      ingress.kubernetes.io&#x2F;proxy-body-size: &quot;0&quot;</span><br><span class="line">      nginx.ingress.kubernetes.io&#x2F;proxy-body-size: &quot;0&quot;</span><br><span class="line"></span><br><span class="line"># 外部地址</span><br><span class="line">externalURL: https:&#x2F;&#x2F;registry.harbor.com</span><br><span class="line"></span><br><span class="line"># 持久存储</span><br><span class="line">persistence:</span><br><span class="line">  enabled: true</span><br><span class="line">  # Setting it to &quot;keep&quot; to avoid removing PVCs during a helm delete</span><br><span class="line">  # operation. Leaving it empty will delete PVCs after the chart deleted</span><br><span class="line">  resourcePolicy: &quot;keep&quot;</span><br><span class="line">  persistentVolumeClaim:</span><br><span class="line">    registry:</span><br><span class="line">      existingClaim: &quot;oss-pvc&quot;</span><br><span class="line">      subPath: &quot;register&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    chartmuseum:</span><br><span class="line">      existingClaim: &quot;oss-pvc&quot;</span><br><span class="line">      subPath: &quot;chartmuseum&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    jobservice:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;jobservice&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    database:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;database&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    redis:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;redis&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    trivy:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;trivy&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br></pre></td></tr></table></figure>
+
+<p>主要配置密码和密钥，以及域名与证书。</p>
+<p>存储我这边分了两部分：</p>
+<ul>
+<li><code>oss-pvc</code> 是阿里云的 OSS，主要保存 Docker 镜像和 Helm Chars。</li>
+<li><code>host-pvc</code> 则是服务器本机的目录，需要高性能的数据库都用这个，后续会增加备份。没有必要区分的数据也放在本机。</li>
+</ul>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>配置正确之后只需要使用 Helm 安装即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install harbor harbor&#x2F;harbor -f values.yaml . --namespace NAMESPACE</span><br></pre></td></tr></table></figure>
+
+<p>安装成功之后打开配置的 <code>externalURL</code>，即可访问。用户名 <code>admin</code>，密码是配置的 <code>harborAdminPassword</code>。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用命令行登陆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login https:&#x2F;&#x2F;register.harbor.com</span><br></pre></td></tr></table></figure>
+
+<p>下载一个官方的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<p>新建标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag alpine:3.9 register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<p>上传</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<h2 id="Charts-管理"><a href="#Charts-管理" class="headerlink" title="Charts 管理"></a>Charts 管理</h2><h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add --username&#x3D;&lt;username&gt; --password&#x3D;&lt;password&gt; &lt;repo-name&gt; https:&#x2F;&#x2F;&lt;harbor-domain&gt;&#x2F;chartrepo&#x2F;&lt;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-PUSH-插件"><a href="#安装-PUSH-插件" class="headerlink" title="安装 PUSH 插件"></a>安装 PUSH 插件</h3><p>默认的 Helm 没有推送功能，需要安装插件才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https:&#x2F;&#x2F;github.com&#x2F;chartmuseum&#x2F;helm-push</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传-Charts"><a href="#上传-Charts" class="headerlink" title="上传 Charts"></a>上传 Charts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm push &lt;charts-dir&gt; &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/goharbor/harbor-helm" target="_blank" rel="noopener">https://github.com/goharbor/harbor-helm</a></li>
+<li><a href="https://www.qikqiak.com/post/harbor-quick-install/" target="_blank" rel="noopener">https://www.qikqiak.com/post/harbor-quick-install/</a></li>
+<li><a href="https://github.com/goharbor/harbor/wiki/Architecture-Overview-of-Harbor" target="_blank" rel="noopener">https://github.com/goharbor/harbor/wiki/Architecture-Overview-of-Harbor</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Harbor/" rel="tag"># Harbor</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/28/k8s-aliyun-oss/" rel="prev" title="Kubernetes 使用 Aliyun OSS 作为持久化存储">
+      <i class="fa fa-chevron-left"></i> Kubernetes 使用 Aliyun OSS 作为持久化存储
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/05/k8s-openldap/" rel="next" title="在 Kubernetes 上部署 OpenLDAP 服务">
+      在 Kubernetes 上部署 OpenLDAP 服务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Harbor"><span class="nav-number">1.</span> <span class="nav-text">Harbor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Registry"><span class="nav-number">1.2.</span> <span class="nav-text">Registry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core"><span class="nav-number">1.3.</span> <span class="nav-text">Core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他组件"><span class="nav-number">1.4.</span> <span class="nav-text">其他组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">3.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Charts-管理"><span class="nav-number">5.</span> <span class="nav-text">Charts 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加仓库"><span class="nav-number">5.1.</span> <span class="nav-text">添加仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-PUSH-插件"><span class="nav-number">5.2.</span> <span class="nav-text">安装 PUSH 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传-Charts"><span class="nav-number">5.3.</span> <span class="nav-text">上传 Charts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

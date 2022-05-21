@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Etby Gao">
+<meta property="og:url" content="http://blog.etby.org/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="article:author" content="Etby">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/05/05/k8s-openldap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/05/k8s-openldap/" class="post-title-link" itemprop="url">在 Kubernetes 上部署 OpenLDAP 服务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-05 09:05:28" itemprop="dateCreated datePublished" datetime="2020-05-05T09:05:28+08:00">2020-05-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装这块我就不细讲了，不论是用 <code>Docker</code> 还是 <code>Helm</code> ，官方的文档永远是最好的参考。我这边是用 <code>Helm</code> 在 <code>Kubernetes</code>  上安装的。安装其实很简单，</p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>官方的 <code>Docker</code> 镜像中，环境变量有一些是只在初始化过程中有用的。比如：<code>LDAP_DOMAIN</code> ， <code>LDAP_ADMIN_PASSWORD</code> 后期一般在 <code>OpenLDAP</code> 内部自己改即可。</p>
+<h3 id="Helm-配置"><a href="#Helm-配置" class="headerlink" title="Helm 配置"></a>Helm 配置</h3><p>创建自定义的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>添加配置，注意修改域名和密码为自己的。我这边由于是在集群中使用，因此没有开 <code>TLS</code>。开启只读用户并且配置，用来让其他平台的服务读取 <code>LDAP</code> 配置，使用其登陆。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">nameOverride: ldap</span><br><span class="line">fullnameOverride: ldap</span><br><span class="line"></span><br><span class="line"># Use the env variables from https:&#x2F;&#x2F;github.com&#x2F;osixia&#x2F;docker-openldap#beginner-guide</span><br><span class="line">env:</span><br><span class="line">  LDAP_ORGANISATION: &quot;Retirwer Technology Co., Ltd&quot;</span><br><span class="line">  LDAP_DOMAIN: &quot;retirwer.com&quot;</span><br><span class="line">  LDAP_BACKEND: &quot;hdb&quot;</span><br><span class="line">  LDAP_TLS: &quot;false&quot;</span><br><span class="line">  LDAP_TLS_ENFORCE: &quot;false&quot;</span><br><span class="line">  LDAP_REMOVE_CONFIG_AFTER_SETUP: &quot;true&quot;</span><br><span class="line">  LDAP_READONLY_USER: &quot;true&quot;</span><br><span class="line">  LDAP_READONLY_USER_USERNAME: &quot;readonly&quot;</span><br><span class="line">  LDAP_READONLY_USER_PASSWORD: &quot;&lt;password&gt;&quot;</span><br><span class="line"></span><br><span class="line"># Default Passwords to use, stored as a secret. If unset, passwords are auto-generated.</span><br><span class="line"># You can override these at install time with</span><br><span class="line"># helm install openldap --set openldap.adminPassword&#x3D;&lt;passwd&gt;,openldap.configPassword&#x3D;&lt;passwd&gt;</span><br><span class="line">adminPassword: &lt;passwd&gt;</span><br><span class="line">configPassword: &lt;passwd&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install ldap stable&#x2F;openldap -f values.yaml</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下，访问地址是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldap.&lt;namespace&gt;.svc.cluster.local</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>OpenLDAP 虽然应用非常广泛，但网上资料却少的可怜。如果你有 <strong>Kindle Unlimited</strong>，上面有一本<strong>郭大勇</strong>写的<strong>《Linux/UNIX OpenLDAP实战指南》</strong>可以免费做参考。如果没有则不建议去买，普通用户只能用到一点点里面的知识，如果你是真正的运维可以考虑买来看看。</p>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>客户端我推荐 <strong>Apache Directory Studio</strong>，毕竟 <strong>LDAP</strong> 的配置是在是太难了！普通用户没必要去学习配置脚本甚至命令，开源跨平台图形化界面的配置工具足够好用。</p>
+<p><strong>安装 Apache Directory Studio</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install apache-directory-studio</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理内容"><a href="#管理内容" class="headerlink" title="管理内容"></a>管理内容</h3><p>管理用户账户、群组和设备，用此方式登陆。</p>
+<p>使用以下 <code>DN</code> 和 <code>adminPassword</code> 登陆，域名需要配置成自己的域名，如果有三层，就配置三层 <code>dc</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cn&#x3D;admin,dc&#x3D;retirwer,dc&#x3D;com</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理配置"><a href="#管理配置" class="headerlink" title="管理配置"></a>管理配置</h3><p>管理基础配置、权限控制等，用此方式登陆。</p>
+<p>使用以下 <code>DN</code> 和 <code>configPassword</code> 登陆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cn&#x3D;admin,dc&#x3D;config</span><br></pre></td></tr></table></figure>
+
+<h3 id="接入配置"><a href="#接入配置" class="headerlink" title="接入配置"></a>接入配置</h3><p>第三方平台接入登陆，比如 <code>Gitlab</code>、<code>Harbor</code>、<code>Jenkins</code>等等。需要读取用户和群组信息，使用只读账户。</p>
+<p>使用以下 <code>DN</code> 和 <code>LDAP_READONLY_USER_PASSWORD</code> 登陆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cn&#x3D;&lt;LDAP_READONLY_USER_USERNAME&gt;,dc&#x3D;retirwer,dc&#x3D;com</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限配置"><a href="#权限配置" class="headerlink" title="权限配置"></a>权限配置</h3><p>参考官方文档： <a href="https://www.openldap.org/doc/admin24/access-control.html" target="_blank" rel="noopener">https://www.openldap.org/doc/admin24/access-control.html</a> </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://github.com/osixia/docker-openldap" target="_blank" rel="noopener">https://github.com/osixia/docker-openldap</a></p>
+</li>
+<li><p><a href="https://github.com/helm/charts/tree/master/stable/openldap" target="_blank" rel="noopener">https://github.com/helm/charts/tree/master/stable/openldap</a></p>
+</li>
+<li><p>《Linux/UNIX OpenLDAP实战指南》郭大勇</p>
+</li>
+<li><p><a href="https://directory.apache.org/studio/" target="_blank" rel="noopener">https://directory.apache.org/studio/</a></p>
+</li>
+<li><p><a href="https://www.openldap.org/doc/admin24/access-control.html" target="_blank" rel="noopener">https://www.openldap.org/doc/admin24/access-control.html</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/28/k8s-install-harbor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/k8s-install-harbor/" class="post-title-link" itemprop="url">使用 Helm 在 Kubernetes 集群中安装 Harbor</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-28 16:44:46" itemprop="dateCreated datePublished" datetime="2020-04-28T16:44:46+08:00">2020-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Harbor"><a href="#Harbor" class="headerlink" title="Harbor"></a>Harbor</h2><p>Harbor 是一个企业级 Registry 服务器，可以用来存放 Docker 镜像，还可以存放 Helm Chats。</p>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p>Nginx 代理，用来转发请求。用 Ingress 之后此模块不会开启。</p>
+<h3 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h3><p>负责存储 Docker 镜像，内核是 Docker 官方的 Registry。</p>
+<p>由于 Registry 没有权限认证，所有 Harbor 对每次请求都会进行鉴权，通过之后再由 Registry 处理。</p>
+<h3 id="Core"><a href="#Core" class="headerlink" title="Core"></a>Core</h3><p>Harbor的核心功能，主要包含以下功能：</p>
+<ul>
+<li>认证与授权</li>
+<li>配置管理</li>
+<li>元数据管理</li>
+<li>内容管理与分发</li>
+</ul>
+<h3 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h3><p><strong>Chart Museum</strong>：Helm Chart 仓库。</p>
+<p><strong>Job Services</strong>：处理异步计算请求。</p>
+<p><strong>Log collector</strong>：日志收集。</p>
+<p><strong>Notary</strong>：信任中心，详情：<a href="https://github.com/theupdateframework/notary" target="_blank" rel="noopener">https://github.com/theupdateframework/notary</a> 。</p>
+<p><strong>Web Portal</strong>：图形化的用户页面，用户通过这个管理 Registry。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>添加仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add harbor https:&#x2F;&#x2F;helm.goharbor.io</span><br><span class="line">helm repo add bitnami https:&#x2F;&#x2F;charts.bitnami.com&#x2F;bitnami</span><br></pre></td></tr></table></figure>
+
+<p>更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>获取配置条目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm inspect values harbor&#x2F;harbor</span><br></pre></td></tr></table></figure>
+
+<p>可以保存为文件，后续参考方便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm inspect values harbor&#x2F;harbor &gt; origin.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"># 密码</span><br><span class="line">harborAdminPassword: &quot;Harbor12345&quot;</span><br><span class="line"># 用于加密的一个 secret key，必须是一个16位的字符串</span><br><span class="line">secretKey: &quot;not-a-secure-key&quot;</span><br><span class="line"></span><br><span class="line"># 对外暴露配置</span><br><span class="line">expose:</span><br><span class="line">  type: ingress</span><br><span class="line">  tls:</span><br><span class="line">    enabled: true</span><br><span class="line">    secretName: harbor-tls</span><br><span class="line">    notarySecretName: harbor-tls</span><br><span class="line">  ingress:</span><br><span class="line">    hosts:</span><br><span class="line">      core: registry.harbor.com</span><br><span class="line">      notary: notary.harbor.com</span><br><span class="line">    annotations:</span><br><span class="line">      kubernetes.io&#x2F;ingress.class: &quot;nginx&quot;</span><br><span class="line"></span><br><span class="line">      ingress.kubernetes.io&#x2F;ssl-redirect: &quot;true&quot;</span><br><span class="line">      nginx.ingress.kubernetes.io&#x2F;ssl-redirect: &quot;true&quot;</span><br><span class="line"></span><br><span class="line">      ingress.kubernetes.io&#x2F;proxy-body-size: &quot;0&quot;</span><br><span class="line">      nginx.ingress.kubernetes.io&#x2F;proxy-body-size: &quot;0&quot;</span><br><span class="line"></span><br><span class="line"># 外部地址</span><br><span class="line">externalURL: https:&#x2F;&#x2F;registry.harbor.com</span><br><span class="line"></span><br><span class="line"># 持久存储</span><br><span class="line">persistence:</span><br><span class="line">  enabled: true</span><br><span class="line">  # Setting it to &quot;keep&quot; to avoid removing PVCs during a helm delete</span><br><span class="line">  # operation. Leaving it empty will delete PVCs after the chart deleted</span><br><span class="line">  resourcePolicy: &quot;keep&quot;</span><br><span class="line">  persistentVolumeClaim:</span><br><span class="line">    registry:</span><br><span class="line">      existingClaim: &quot;oss-pvc&quot;</span><br><span class="line">      subPath: &quot;register&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    chartmuseum:</span><br><span class="line">      existingClaim: &quot;oss-pvc&quot;</span><br><span class="line">      subPath: &quot;chartmuseum&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    jobservice:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;jobservice&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    database:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;database&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    redis:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;redis&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br><span class="line">    trivy:</span><br><span class="line">      existingClaim: &quot;host-pvc&quot;</span><br><span class="line">      subPath: &quot;trivy&quot;</span><br><span class="line">      accessMode: ReadWriteMany</span><br></pre></td></tr></table></figure>
+
+<p>主要配置密码和密钥，以及域名与证书。</p>
+<p>存储我这边分了两部分：</p>
+<ul>
+<li><code>oss-pvc</code> 是阿里云的 OSS，主要保存 Docker 镜像和 Helm Chars。</li>
+<li><code>host-pvc</code> 则是服务器本机的目录，需要高性能的数据库都用这个，后续会增加备份。没有必要区分的数据也放在本机。</li>
+</ul>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>配置正确之后只需要使用 Helm 安装即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install harbor harbor&#x2F;harbor -f values.yaml . --namespace NAMESPACE</span><br></pre></td></tr></table></figure>
+
+<p>安装成功之后打开配置的 <code>externalURL</code>，即可访问。用户名 <code>admin</code>，密码是配置的 <code>harborAdminPassword</code>。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用命令行登陆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login https:&#x2F;&#x2F;register.harbor.com</span><br></pre></td></tr></table></figure>
+
+<p>下载一个官方的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<p>新建标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag alpine:3.9 register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<p>上传</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push register.harbor.com&#x2F;library&#x2F;alpine:3.9</span><br></pre></td></tr></table></figure>
+
+<h2 id="Charts-管理"><a href="#Charts-管理" class="headerlink" title="Charts 管理"></a>Charts 管理</h2><h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add --username&#x3D;&lt;username&gt; --password&#x3D;&lt;password&gt; &lt;repo-name&gt; https:&#x2F;&#x2F;&lt;harbor-domain&gt;&#x2F;chartrepo&#x2F;&lt;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-PUSH-插件"><a href="#安装-PUSH-插件" class="headerlink" title="安装 PUSH 插件"></a>安装 PUSH 插件</h3><p>默认的 Helm 没有推送功能，需要安装插件才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https:&#x2F;&#x2F;github.com&#x2F;chartmuseum&#x2F;helm-push</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传-Charts"><a href="#上传-Charts" class="headerlink" title="上传 Charts"></a>上传 Charts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm push &lt;charts-dir&gt; &lt;repo&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/goharbor/harbor-helm" target="_blank" rel="noopener">https://github.com/goharbor/harbor-helm</a></li>
+<li><a href="https://www.qikqiak.com/post/harbor-quick-install/" target="_blank" rel="noopener">https://www.qikqiak.com/post/harbor-quick-install/</a></li>
+<li><a href="https://github.com/goharbor/harbor/wiki/Architecture-Overview-of-Harbor" target="_blank" rel="noopener">https://github.com/goharbor/harbor/wiki/Architecture-Overview-of-Harbor</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/28/k8s-aliyun-oss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/k8s-aliyun-oss/" class="post-title-link" itemprop="url">Kubernetes 使用 Aliyun OSS 作为持久化存储</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-28 08:26:52" itemprop="dateCreated datePublished" datetime="2020-04-28T08:26:52+08:00">2020-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="插件选择"><a href="#插件选择" class="headerlink" title="插件选择"></a>插件选择</h2><p><code>Kubernetes</code> 与外部存储对接时要使用插件，自定义插件有很多协议。阿里云支持的插件为 <code>Flexvolume</code> 和 <code>CSI</code>，需要选择用哪一个插件搭建系统。由于 CSI 比较新，而且社区推荐使用，我这边就选择了 CSI。</p>
+<h3 id="Flexvolume"><a href="#Flexvolume" class="headerlink" title="Flexvolume"></a>Flexvolume</h3><p>Flexvolume插件是Kubernetes社区较早实现的存储卷扩展机制。ACK从上线起，即支持Flexvolume类型数据卷服务。Flexvolume插件包括以下三部分。</p>
+<ul>
+<li>Flexvolume：负责数据卷的挂载、卸载功能。ACK默认提供云盘、NAS、OSS三种存储卷的挂载能力。</li>
+<li>Disk-Controller：负责云盘卷的自动创建能力。</li>
+<li>Nas-Controller：负责NAS卷的自动创建能力。</li>
+</ul>
+<h3 id="CSI"><a href="#CSI" class="headerlink" title="CSI"></a>CSI</h3><p>CSI插件是当前Kubernetes社区推荐的插件实现方案。ACK集群提供的CSI存储插件兼容社区的CSI特性。CSI插件包括以下两部分：</p>
+<ul>
+<li>CSI-Plugin：实现数据卷的挂载、卸载功能。ACK默认提供云盘、NAS、OSS三种存储卷的挂载能力。</li>
+<li>CSI-Provisioner：实现数据卷的自动创建能力，目前支持云盘、NAS两种存储卷创建能力。</li>
+</ul>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace cloud-retirwer-k8s-plugin</span><br></pre></td></tr></table></figure>
+
+<h3 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h3><p>下载 RBAC 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;deploy&#x2F;rbac.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>namespace</code> ，后续的所有配置也都要修改命名空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin</span><br><span class="line">  # replace with the same namespace name with plugin</span><br><span class="line">  namespace: cloud-retirwer-k8s-plugin</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 省略权限配置</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">metadata:</span><br><span class="line">  name: alicloud-csi-plugin</span><br><span class="line">subjects:</span><br><span class="line">  - kind: ServiceAccount</span><br><span class="line">    name: admin</span><br><span class="line">    namespace: cloud-retirwer-k8s-plugin</span><br><span class="line">roleRef:</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: alicloud-csi-plugin</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f rbac.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="OSS-Plugin"><a href="#OSS-Plugin" class="headerlink" title="OSS-Plugin"></a>OSS-Plugin</h3><p>下载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;deploy&#x2F;oss&#x2F;oss-plugin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>namespace</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kind: DaemonSet</span><br><span class="line">apiVersion: apps&#x2F;v1beta2</span><br><span class="line">metadata:</span><br><span class="line">  name: csi-ossplugin</span><br><span class="line">  namespace: cloud-retirwer-k8s-plugin</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f oss-plugin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>常见问题如下，k8s 高版本对于 beta 版 API 有所更改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: unable to recognize &quot;oss-plugin.yaml&quot;: no matches for kind &quot;DaemonSet&quot; in version &quot;apps&#x2F;v1beta2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果碰见以上问题 ，则将版本修改为 V1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kind: DaemonSet</span><br><span class="line">apiVersion: apps&#x2F;v1</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote>
+<p> 需要提前创建好 OSS Bucket，配置好权限，获得访问密钥。</p>
+</blockquote>
+<p>下载测试配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;deploy.yaml</span><br><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;pv.yaml</span><br><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;pvc.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: oss-csi-pv</span><br><span class="line">  labels:</span><br><span class="line">    alicloud-pvname: oss-csi-pv</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 5Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteOnce</span><br><span class="line">  persistentVolumeReclaimPolicy: Retain</span><br><span class="line">  csi:</span><br><span class="line">    driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">    # set volumeHandle same value pv name</span><br><span class="line">    volumeHandle: oss-csi-pv</span><br><span class="line">    volumeAttributes:</span><br><span class="line">      bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">      url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">      otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">      akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">      akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">      path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br><span class="line">kubectl apply -f pvc.yaml</span><br><span class="line">kubectl apply -f deploy.yaml</span><br></pre></td></tr></table></figure>
+
+<p>检查运行状态，如果三个都正常就没问题了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pv | grep oss</span><br><span class="line">kubectl get pvc | grep oss</span><br><span class="line">kubectl get pod | grep oss</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h3><p>使用此 CSI 主要是需要在定义 PV 的配置中做特殊配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: pv-name</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 5Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteOnce</span><br><span class="line">  # 回收模式 一定要选保留</span><br><span class="line">  persistentVolumeReclaimPolicy: Retain</span><br><span class="line">  csi:</span><br><span class="line">    driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">    # set volumeHandle same value pv name</span><br><span class="line">    volumeHandle: oss-csi-pv</span><br><span class="line">    volumeAttributes:</span><br><span class="line">      bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">      url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">      otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">      akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">      akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">      path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="存储大小"><a href="#存储大小" class="headerlink" title="存储大小"></a>存储大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 定义存储大小，Gi 代表以 1024 的算法进行计算大小</span><br><span class="line">capacity:</span><br><span class="line">	storage: 5Gi</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问模式"><a href="#访问模式" class="headerlink" title="访问模式"></a>访问模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 访问模式 OSS 支持 ReadWriteMany</span><br><span class="line">accessModes:</span><br><span class="line">	- ReadWriteOnce</span><br></pre></td></tr></table></figure>
+
+<h4 id="回收模式"><a href="#回收模式" class="headerlink" title="回收模式"></a>回收模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">persistentVolumeReclaimPolicy: Retain</span><br></pre></td></tr></table></figure>
+
+<p>回收模式一般要选保留，不排除特殊情况</p>
+<h4 id="CSI-1"><a href="#CSI-1" class="headerlink" title="CSI"></a>CSI</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">csi:</span><br><span class="line">  driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">  volumeHandle: oss-csi-pv</span><br><span class="line">  volumeAttributes:</span><br><span class="line">    bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">    url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">    otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">    akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">    akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">    path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>driver</code> 是所要挂载的驱动，需要和之前安装的相同，如果你用其他厂家或者是不同的产品，根据情况调整。<code>volumeHandle</code> 唯一标识从 CSI 卷插件的 <code>CreateVolume</code> 调用返回的卷名。随后在卷驱动程序的所有后续调用中使用卷句柄来引用该卷，一般和 PV 名称相同。<code>volumeAttributes</code> 则是外部服务提供商自己定义的值，OSS 目前是这些配置，其他厂家有不同的配置。</p>
+<h3 id="PVC"><a href="#PVC" class="headerlink" title="PVC"></a>PVC</h3><p>不需要做特殊配置。选择器需要匹配自己想要使用的 PV。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: oss-pvc</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">  - ReadWriteOnce</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 5Gi</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      alicloud-pvname: oss-csi-pv</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver/blob/master/README-zh_CN.md" target="_blank" rel="noopener">https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver/blob/master/README-zh_CN.md</a></p>
+</li>
+<li><p><a href="https://help.aliyun.com/document_detail/157026.html" target="_blank" rel="noopener">https://help.aliyun.com/document_detail/157026.html</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/26/k8s-release-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/26/k8s-release-app/" class="post-title-link" itemprop="url">在 K8S 集群上发布应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-26 22:23:42" itemprop="dateCreated datePublished" datetime="2020-04-26T22:23:42+08:00">2020-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="应用介绍"><a href="#应用介绍" class="headerlink" title="应用介绍"></a>应用介绍</h2><p>目标是将公司网站发布到集群中。前期准备：域名备案，编写代码与打包镜像。由于目前还是简易的纯前端展示页面，以及基础设施还不太完善，我就直接将镜像放到 DockerHub 上了。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p><a href="https://github.com/Retirwer/www.retirwer.com" target="_blank" rel="noopener">https://github.com/Retirwer/www.retirwer.com</a></p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p><a href="https://hub.docker.com/repository/docker/retirwer/www.retirwer.com" target="_blank" rel="noopener">https://hub.docker.com/repository/docker/retirwer/www.retirwer.com</a></p>
+<h2 id="集群环境"><a href="#集群环境" class="headerlink" title="集群环境"></a>集群环境</h2><h3 id="CertManager"><a href="#CertManager" class="headerlink" title="CertManager"></a>CertManager</h3><p>用来自动申请 HTTPS 证书。</p>
+<h3 id="Helm"><a href="#Helm" class="headerlink" title="Helm"></a>Helm</h3><p>用来进行 Kubernetes 应用的管理。</p>
+<h2 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h2><h3 id="创建-Helm-Chars"><a href="#创建-Helm-Chars" class="headerlink" title="创建 Helm Chars"></a>创建 Helm Chars</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm create www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<p>由于基本模板对于简单的展示站够用，目前只需要修改 <code>Chart.yaml</code> 和 <code>values.yaml</code> 文件即可。</p>
+<h3 id="Chart-yaml"><a href="#Chart-yaml" class="headerlink" title="Chart.yaml"></a>Chart.yaml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v2</span><br><span class="line">name: www.retirwer.com</span><br><span class="line">description: Retirwer Technology Co., Ltd Official Web Site.</span><br><span class="line">type: application</span><br><span class="line">version: 0.1.0</span><br><span class="line">appVersion: 0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="values-yaml"><a href="#values-yaml" class="headerlink" title="values.yaml"></a>values.yaml</h3><p>修改镜像，版本则和 <code>appVersion</code> 相同，后续更改版本只需要修改 <code>Chart.yaml</code> 中的 <code>appVersion</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image:</span><br><span class="line">  repository: retirwer&#x2F;www.retirwer.com</span><br><span class="line">  pullPolicy: IfNotPresen</span><br></pre></td></tr></table></figure>
+
+<p>配置 <code>Ingress</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ingress:</span><br><span class="line">  enabled: true</span><br><span class="line">  annotations:</span><br><span class="line">    # 使用 Nginx-Ingress 的配置</span><br><span class="line">    kubernetes.io&#x2F;ingress.class: nginx</span><br><span class="line">    # 根据自己的 cert-manager 的配置修改</span><br><span class="line">    cert-manager.io&#x2F;cluster-issuer: letsencrypt-prod</span><br><span class="line">  hosts:</span><br><span class="line">    - host: www.retirwer.com</span><br><span class="line">    	# 只配置根目录</span><br><span class="line">      paths: [&#x2F;]</span><br><span class="line">  tls:</span><br><span class="line">   - secretName: www.retirwer.com-tls</span><br><span class="line">     hosts:</span><br><span class="line">       - www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>对于其他用不到的配置模版可以删掉，也可以不启用。</li>
+</ul>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>一般必须指定命名空间，如果不指定则使用当前命名空间。</p>
+<h3 id="确认发布配置"><a href="#确认发布配置" class="headerlink" title="确认发布配置"></a>确认发布配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --debug --dry-run</span><br></pre></td></tr></table></figure>
+
+<h3 id="首次发布"><a href="#首次发布" class="headerlink" title="首次发布"></a>首次发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新发布"><a href="#更新发布" class="headerlink" title="更新发布"></a>更新发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm upgrade &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载发布"><a href="#卸载发布" class="headerlink" title="卸载发布"></a>卸载发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall &lt;release-name&gt; --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/24/migrat-k8s-1-17-to-1-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/migrat-k8s-1-17-to-1-18/" class="post-title-link" itemprop="url">将 Kubernetes 从 1.17 升级到 1.18</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-24 21:58:56" itemprop="dateCreated datePublished" datetime="2020-04-24T21:58:56+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><p>我的集群是自建的独立 ETCD 集群，然后其他组件全部用 kubeadm 来进行安装的，升级起来比较方便。</p>
+<p>一般来说，只有第一台 Master 需要的操作比较多，后续的 Master 和 Node 操作基本相同。如果经常升级的话，倒是可以写一个脚本去做，我因为第一次做 K8S 的升级。不太熟，所以全程手动升级的。</p>
+<p>过程中使用 Tmux 进行远程链接安全性的保证。如果因为某些操作中途中断导致升级失败，那麻烦就大了。</p>
+<h2 id="升级要求"><a href="#升级要求" class="headerlink" title="升级要求"></a>升级要求</h2><ul>
+<li>必须在 1.17 以上版本</li>
+<li>必须使用外部 ETCD</li>
+<li>切记备份数据</li>
+</ul>
+<h2 id="确定目标版本"><a href="#确定目标版本" class="headerlink" title="确定目标版本"></a>确定目标版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt-cache madison kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>得到最新版本 <code>1.18.2-00</code></p>
+<h2 id="升级主节点集群"><a href="#升级主节点集群" class="headerlink" title="升级主节点集群"></a>升级主节点集群</h2><h3 id="开始升级第一个主节点"><a href="#开始升级第一个主节点" class="headerlink" title="开始升级第一个主节点"></a>开始升级第一个主节点</h3><p>升级 kubeadm </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubeadm &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubeadm&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>确认版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm version</span><br></pre></td></tr></table></figure>
+
+<p>清空节点上的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl drain &lt;cp-node-name&gt; --ignore-daemonsets</span><br></pre></td></tr></table></figure>
+
+<p>在需要升级的节点上运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade plan</span><br></pre></td></tr></table></figure>
+
+<p>选择要升级到的版本，然后运行相应的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade apply v1.18.2</span><br></pre></td></tr></table></figure>
+
+<p>升级完成之后需要升级 kubelet 和 kubectl ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubelet kubectl &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubelet&#x3D;1.18.2-00 kubectl&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubelet kubectl</span><br></pre></td></tr></table></figure>
+
+<p>重启 kubelet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<p>取消节点限制策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl uncordon &lt;cp-node-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="升级其他主节点"><a href="#升级其他主节点" class="headerlink" title="升级其他主节点"></a>升级其他主节点</h3><p>先升级 kubeadm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubeadm &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubeadm&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>然后清空节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl drain &lt;cp-node-name&gt; --ignore-daemonsets</span><br></pre></td></tr></table></figure>
+
+<p>执行升级命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade node</span><br></pre></td></tr></table></figure>
+
+<p>升级完成之后需要升级 kubelet 和 kubectl ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubelet kubectl &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubelet&#x3D;1.18.2-00 kubectl&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubelet kubectl</span><br></pre></td></tr></table></figure>
+
+<p>重启 kubelet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<p>取消节点限制策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl uncordon &lt;cp-node-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="升级工作节点"><a href="#升级工作节点" class="headerlink" title="升级工作节点"></a>升级工作节点</h2><p>升级工作节点的步骤与升级其他主节点步骤相同。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>网络插件按需升级，我这边暂时没有升级的需求，就没有升级了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/</a></p>
+</li>
+<li><p><a href="https://mritd.me/2020/01/21/how-to-upgrade-kubeadm-cluster/" target="_blank" rel="noopener">https://mritd.me/2020/01/21/how-to-upgrade-kubeadm-cluster/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/01/05/openwrt-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/05/openwrt-config/" class="post-title-link" itemprop="url">OpenWrt 路由器配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-05 14:44:09" itemprop="dateCreated datePublished" datetime="2020-01-05T14:44:09+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="INIT"><a href="#INIT" class="headerlink" title="INIT"></a>INIT</h2><p><strong>Change Password</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password</span><br></pre></td></tr></table></figure>
+
+<h2 id="WAN"><a href="#WAN" class="headerlink" title="WAN"></a>WAN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Config Static IP</span><br><span class="line">uci set network.wan.proto&#x3D;static</span><br><span class="line">uci set network.wan.ipaddr&#x3D;10.10.10.5</span><br><span class="line">uci set network.wan.netmask&#x3D;255.255.255.0</span><br><span class="line">uci set network.wan.gateway&#x3D;10.10.10.1</span><br><span class="line"></span><br><span class="line"># Review Config</span><br><span class="line">uci export network</span><br><span class="line"></span><br><span class="line"># Commit UCI Config, need restart network to working.</span><br><span class="line">uci commit</span><br></pre></td></tr></table></figure>
+
+<h2 id="LAN"><a href="#LAN" class="headerlink" title="LAN"></a>LAN</h2><blockquote>
+<p>Use edit config files way.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;config&#x2F;network</span><br><span class="line"></span><br><span class="line">config interface &#39;lan&#39;</span><br><span class="line">        option type &#39;bridge&#39;</span><br><span class="line">        option ifname &#39;eth0&#39;</span><br><span class="line">        option proto &#39;static&#39;</span><br><span class="line">        option ipaddr &#39;192.168.1.1&#39;</span><br><span class="line">        option netmask &#39;255.255.255.0&#39;</span><br><span class="line">        option dns &#39;10.10.10.1&#39;</span><br><span class="line">        option ip6assign &#39;60&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WLAN"><a href="#WLAN" class="headerlink" title="WLAN"></a>WLAN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Enable Wireless Device</span><br><span class="line">uci set wireless.@wifi-device[0].disabled&#x3D;0</span><br><span class="line"></span><br><span class="line"># Config Wireless</span><br><span class="line">uci set wireless.@wifi-iface[0].mode&#x3D;ap</span><br><span class="line">uci set wireless.@wifi-iface[0].ssid&#x3D;TSFuShui</span><br><span class="line">uci set wireless.@wifi-iface[0].encryption&#x3D;psk2</span><br><span class="line">uci set wireless.@wifi-iface[0].key&#x3D;88888888</span><br><span class="line">uci set wireless.@wifi-iface[0].network&#x3D;lan</span><br><span class="line"></span><br><span class="line"># Review Config</span><br><span class="line">uci export wireless</span><br><span class="line"></span><br><span class="line"># Commit UCI Config, need restart network to working.</span><br><span class="line">uci commit</span><br></pre></td></tr></table></figure>
+
+<h2 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Restart network to apply config</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;network restart</span><br><span class="line"></span><br><span class="line"># If ping is ok, Good Net.</span><br><span class="line">ping 1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="PACKAGE"><a href="#PACKAGE" class="headerlink" title="PACKAGE"></a>PACKAGE</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># update package list</span><br><span class="line">opkg update</span><br><span class="line"></span><br><span class="line"># show upgrable pkg</span><br><span class="line">opkg list-upgradable</span><br><span class="line"></span><br><span class="line"># upgrade one pkg</span><br><span class="line">opkg upgrade &lt;pkg&gt;</span><br><span class="line"></span><br><span class="line"># upgrade all pkg</span><br><span class="line">opkg list-upgradable | cut -f 1 -d &#39; &#39; | xargs opkg upgrade</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/01/01/ros-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/01/ros-config/" class="post-title-link" itemprop="url">RouterOS 配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-01 11:12:14" itemprop="dateCreated datePublished" datetime="2020-01-01T11:12:14+08:00">2020-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>ROS 命令行一个命令其实逻辑上会进入到对应的目录，只有最后一个执行文件才会真正执行，所以可以用这种操作简化命令输入。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入 system 其实进入了 system 目录， 之后进入 routerboard 目录，</span></span><br><span class="line">[admin@MikroTik] &gt; system</span><br><span class="line">[admin@MikroTik] /system&gt; routerboard</span><br><span class="line">[admin@MikroTik] /system routerboard&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 再输入最后的可执行命令，就执行了 <span class="built_in">print</span> 命令</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; print</span><br><span class="line">       routerboard: yes</span><br><span class="line">             model: RB4011iGS+</span><br><span class="line">     serial-number: B8FF0B97D030</span><br><span class="line">     firmware-type: al2</span><br><span class="line">  factory-firmware: 6.44.5</span><br><span class="line">  current-firmware: 6.44.6</span><br><span class="line">  upgrade-firmware: 6.44.6</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果想回到根目录，使用 /</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; /</span><br><span class="line">[admin@MikroTik] &gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在命令行中随时输入 ？ 会弹出命令和帮助</span></span><br><span class="line">[admin@MikroTik] /ip address&gt;</span><br><span class="line">IP addresses are given to router to access it remotely and to specify it as a gateway for other hosts/routers.</span><br><span class="line"></span><br><span class="line">.. -- go up to ip</span><br><span class="line">add -- Create a new item</span><br><span class="line">comment -- Set comment for items</span><br><span class="line">disable -- Disable items</span><br><span class="line">edit --</span><br><span class="line">enable -- Enable items</span><br><span class="line">export -- Print or save an export script that can be used to restore configuration</span><br><span class="line">find -- Find items by value</span><br><span class="line">get -- Gets value of item's property</span><br><span class="line">print -- Print values of item properties</span><br><span class="line">remove -- Remove item</span><br><span class="line">set -- Change item properties</span><br></pre></td></tr></table></figure>
+
+<h2 id="新机联网"><a href="#新机联网" class="headerlink" title="新机联网"></a>新机联网</h2><h3 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改默认的空密码为自定义的密码</span><br><span class="line">&#x2F;password</span><br><span class="line"></span><br><span class="line"># 关闭一些不用的服务 （ 我这边只保留了 ssh 和 winbox ）</span><br><span class="line">&#x2F;ip service disable telnet,ftp,www,api,api-ssl</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置公网"><a href="#配置公网" class="headerlink" title="配置公网"></a>配置公网</h3><p>由于目前都是光猫直接拨号，一般情况只需要配置IP即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 修改与光猫连接端口名称 </span><br><span class="line">&#x2F;interface ethernet set ether1 name&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 配置光猫内网IP 针对与光猫链接的端口</span><br><span class="line">&#x2F;ip address add address&#x3D;192.168.1.2&#x2F;24 interface&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 可以尝试 ping 光猫测试是否成功</span><br><span class="line">&#x2F;ping 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="内网配置"><a href="#内网配置" class="headerlink" title="内网配置"></a>内网配置</h3><p><strong>网络配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 新建网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 将接口加入网桥</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 添加默认网关</span><br><span class="line">&#x2F;ip route add gateway&#x3D;192.168.1.1</span><br><span class="line"></span><br><span class="line"># 出口 SNAT 转换</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;srcnat action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>DNS 和 DHCP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 配置 DNS 并且允许其他设备访问</span><br><span class="line">&#x2F;ip dns set servers&#x3D;1.1.1.1,114.114.114.114 allow-remote-requests&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 新建 IP 池</span><br><span class="line">&#x2F;ip pool add ranges&#x3D;10.10.10.100-10.10.10.200 name&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 建立 DHCP 服务器</span><br><span class="line">&#x2F;ip dhcp-server add name&#x3D;NET-DHCP interface&#x3D;bridge address-pool&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 配置 DHCP 网络</span><br><span class="line">&#x2F;ip dhcp-server network add address&#x3D;10.10.10.0&#x2F;24 dns-server&#x3D;10.10.10.1 gateway&#x3D;10.10.10.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h2><h3 id="内网-VLAN-配置"><a href="#内网-VLAN-配置" class="headerlink" title="内网 VLAN 配置"></a>内网 VLAN 配置</h3><p><strong>网桥</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 新建支持 VLAN 的网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge vlan-filtering&#x3D;no</span><br><span class="line"></span><br><span class="line"># 将端口加入网桥 并配置 VLAN</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上新建路由器使用的 VLAN</span><br><span class="line">&#x2F;interface vlan add interface&#x3D;bridge name&#x3D;VLAN-NET vlan-id&#x3D;10</span><br><span class="line"></span><br><span class="line"># 在 VLAN 上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;VLAN-NET</span><br></pre></td></tr></table></figure>
+
+<p><strong>VLAN</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 开启入口流量过滤 提高安全性</span><br><span class="line">&#x2F;interface bridge port </span><br><span class="line">set [f] ingress-filtering&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 设置网桥端口过滤 VLAN 标签模式</span><br><span class="line">&#x2F;interface bridge port</span><br><span class="line"># 允许所有类型帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-all</span><br><span class="line"># 只允许打了合适 VLAN 标签的帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-vlan-tagged</span><br><span class="line"># 允许未打标签和优先标签通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-untagged-and-priority-tagged</span><br><span class="line"></span><br><span class="line"># 配置网桥 VLAN</span><br><span class="line"># 针对 VLAN 10，sfp1 打标签，ether1,ether2 去掉标签</span><br><span class="line">add bridge&#x3D;bridge vlan-ids&#x3D;10 tagged&#x3D;sfp1 untagged&#x3D;ether1,ether2 </span><br><span class="line"># 如果网桥自身也要转发，需要配置网桥自身</span><br><span class="line">add bridge&#x3D;bridge tagged&#x3D;bridge,ether1 vlan-ids&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p><strong>查看现有的NAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[admin@MikroTik] &#x2F;ip firewall nat&gt; print</span><br><span class="line">Flags: X - disabled, I - invalid, D - dynamic</span><br><span class="line"> 0    ;;; defconf: masquerade</span><br><span class="line">      chain&#x3D;srcnat action&#x3D;masquerade out-interface-list&#x3D;WAN ipsec-policy&#x3D;out,none</span><br></pre></td></tr></table></figure>
+
+<p>目前是默认配置，对于所有 WAN 接口列表中的接口，都使用改变源IP的方式做NAT。</p>
+<h4 id="配置端口转发"><a href="#配置端口转发" class="headerlink" title="配置端口转发"></a><strong>配置端口转发</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将外网8000端口映射到内网服务器上的80端口</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;dstnat protocol&#x3D;tcp dst-port&#x3D;8000 in-interface&#x3D;ether5 action&#x3D;dst-nat to-addresses&#x3D;10.10.10.80 to-ports&#x3D;80</span><br></pre></td></tr></table></figure>
+
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 允许已经建立的链接通过</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input connection-state&#x3D;established,related in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br><span class="line"># 过滤掉所有的外部链接进入</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br></pre></td></tr></table></figure>
+
+<h3 id="WAN-负载均衡"><a href="#WAN-负载均衡" class="headerlink" title="WAN 负载均衡"></a>WAN 负载均衡</h3><p><strong>标记公网网卡进入的链接</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle</span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-DIRECT connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_DIRECT </span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-HOME connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建 PCC 规则</strong></p>
+<p><a href="https://wiki.mikrotik.com/wiki/Manual:PCC" target="_blank" rel="noopener">https://wiki.mikrotik.com/wiki/Manual:PCC</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 未标记的内网流量根据算法选择路由出去</span><br><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_DIRECT per-connection-classifier&#x3D;both-address:2&#x2F;0 </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_HOME per-connection-classifier&#x3D;both-address:2&#x2F;1</span><br></pre></td></tr></table></figure>
+
+<p><strong>建立路由标记</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_DIRECT in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_DIRECT</span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_HOME in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_HOME</span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_DIRECT action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_DIRECT     </span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_HOME action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建路由</strong></p>
+<p>策略路由 distance 默认为 0，之后创建备用的 distance 为 1 的路由备用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip route</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 routing-mark&#x3D;TO_WAN_DIRECT check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 routing-mark&#x3D;TO_WAN_HOME check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 distance&#x3D;1 check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 distance&#x3D;2 check-gateway&#x3D;ping</span><br></pre></td></tr></table></figure>
+
+<p><strong>SNAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall nat </span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-DIRECT action&#x3D;masquerade</span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-HOME action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>策略路由</strong></p>
+<p>防止策略路由导致的路由环路，处理 WAN 的局部网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall mangle</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.1.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.2.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/25/mac-java-dev-env/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/25/mac-java-dev-env/" class="post-title-link" itemprop="url">Mac 下的 Java 开发环境配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-25 20:54:43" itemprop="dateCreated datePublished" datetime="2019-11-25T20:54:43+08:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装-JAVA"><a href="#安装-JAVA" class="headerlink" title="安装 JAVA"></a>安装 JAVA</h2><p>直接安装最新版本 （ oracle jdk ），其他版本的可从官网下载安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install java</span><br></pre></td></tr></table></figure>
+
+<p>安装选定版本 （ openjdk ）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew&#x2F;cask-versions</span><br><span class="line">brew tap adoptopenjdk&#x2F;openjdk</span><br><span class="line">brew update</span><br><span class="line">brew cask install adoptopenjdk&#x2F;openjdk&#x2F;adoptopenjdk8 </span><br><span class="line"># 也可以安装 9&#x2F;10&#x2F;11&#x2F;12&#x2F;13 等</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装编译工具"><a href="#安装编译工具" class="headerlink" title="安装编译工具"></a>安装编译工具</h2><p>安装 Maven</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install maven</span><br></pre></td></tr></table></figure>
+
+<p>安装 Gradle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install gradle</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/22/letencrypt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/22/letencrypt/" class="post-title-link" itemprop="url">使用 Let‘s Encrypt 签发免费 SSL 证书</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-22 14:13:44" itemprop="dateCreated datePublished" datetime="2019-11-22T14:13:44+08:00">2019-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="添加-PPA-仓库"><a href="#添加-PPA-仓库" class="headerlink" title="添加 PPA 仓库"></a>添加 PPA 仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository universe</span><br><span class="line">sudo add-apt-repository ppa:certbot&#x2F;certbot</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install certbot</span><br></pre></td></tr></table></figure>
+
+<h2 id="签发证书"><a href="#签发证书" class="headerlink" title="签发证书"></a>签发证书</h2><p>使用以下命令签发证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly --manual --preferred-challenges dns -d gaobo.name</span><br></pre></td></tr></table></figure>
+
+<p><code>certonly --manual</code> 代表手动签发证书，不进行其他配置工作。</p>
+<p><code>--preferred-challenges dns</code> 代表验证方式使用 DNS 进行域名所有权的验证，也可以选择 <code>http</code> 方式进行验证。</p>
+<p><code>-d gaobo.name</code> 则是域名配置，后面可以多次使用 <code>-d DOMAIN</code> 来配置多个域名。</p>
+<h3 id="修改-DNS-解析"><a href="#修改-DNS-解析" class="headerlink" title="修改 DNS 解析"></a>修改 DNS 解析</h3><p>在执行上面的命令之后，会有几步相关的操作让你确认。之后会给你一段口令让你设置到 DNS 解析上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.gaobo.name with the following value:</span><br><span class="line"></span><br><span class="line">aO0HEtcVvHPPGY2a8JHEzjIXcDj8QD0kWb48Xmbh3g8</span><br><span class="line"></span><br><span class="line">Before continuing, verify the record is deployed.</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
+
+<p>按照提示设置好之后，按回车键即可。</p>
+<h3 id="成功签发"><a href="#成功签发" class="headerlink" title="成功签发"></a>成功签发</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">IMPORTANT NOTES:</span><br><span class="line"> - Congratulations! Your certificate and chain have been saved at:</span><br><span class="line">   &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;fullchain.pem</span><br><span class="line">   Your key file has been saved at:</span><br><span class="line">   &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;privkey.pem</span><br><span class="line">   Your cert will expire on 2020-02-20. To obtain a new or tweaked</span><br><span class="line">   version of this certificate in the future, simply run certbot</span><br><span class="line">   again. To non-interactively renew *all* of your certificates, run</span><br><span class="line">   &quot;certbot renew&quot;</span><br><span class="line"> - Your account credentials have been saved in your Certbot</span><br><span class="line">   configuration directory at &#x2F;etc&#x2F;letsencrypt. You should make a</span><br><span class="line">   secure backup of this folder now. This configuration directory will</span><br><span class="line">   also contain certificates and private keys obtained by Certbot so</span><br><span class="line">   making regular backups of this folder is ideal.</span><br><span class="line"> - If you like Certbot, please consider supporting our work by:</span><br><span class="line"></span><br><span class="line">   Donating to ISRG &#x2F; Let&#39;s Encrypt:   https:&#x2F;&#x2F;letsencrypt.org&#x2F;donate</span><br><span class="line">   Donating to EFF:                    https:&#x2F;&#x2F;eff.org&#x2F;donate-le</span><br></pre></td></tr></table></figure>
+
+<p>出现上面的提示之后就代表成功签发了，接下来只需要在 Web 服务器中进行配置即可。</p>
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><h3 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX</h3><p>如下所示，配置 <code>ssl_certificate</code> 和 <code>ssl_certificate_key</code> 即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name gaobo.name;</span><br><span class="line"></span><br><span class="line">    ssl_certificate &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;fullchain.pem;</span><br><span class="line">    ssl_certificate_key &#x2F;etc&#x2F;letsencrypt&#x2F;live&#x2F;gaobo.name&#x2F;privkey.pem;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        proxy_pass http:&#x2F;&#x2F;127.0.0.1:8002;</span><br><span class="line">        include proxy_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://certbot.eff.org/docs/using.html#certbot-commands" target="_blank" rel="noopener">https://certbot.eff.org/docs/using.html#certbot-commands</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2019/11/21/linux-secure-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/21/linux-secure-ssh/" class="post-title-link" itemprop="url">配置安全的 SSHD</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-21 16:12:37" itemprop="dateCreated datePublished" datetime="2019-11-21T16:12:37+08:00">2019-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑 <code>/etc/ssh/sshd_config</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 修改 SSH 端口为非常用端口</span><br><span class="line">Port 22222</span><br><span class="line"># 限制登陆过程的时间</span><br><span class="line">LoginGraceTime 5</span><br><span class="line"># 限制登陆过程重试次数</span><br><span class="line">MaxAuthTries 1</span><br><span class="line"></span><br><span class="line"># 禁止 Root 用户登陆</span><br><span class="line">PermitRootLogin no </span><br><span class="line"># 禁止空密码</span><br><span class="line">PermitEmptyPasswords no</span><br><span class="line"># 禁止密码登陆</span><br><span class="line">PasswordAuthentication no </span><br><span class="line"></span><br><span class="line"># 只允许特定用户登陆</span><br><span class="line">AllowUsers etbyapt</span><br></pre></td></tr></table></figure>
+
+<p>重启服务 <code>systemctl restart ssh</code></p>
+<h2 id="隐藏端口"><a href="#隐藏端口" class="headerlink" title="隐藏端口"></a>隐藏端口</h2><p>虽然我们能够更改端口号，和一些配置。但是，仍然有被扫描器扫描到的风险。如何能够让某个端口只在特定的情况下为我们自己开启，然后进行连接呢？我们可以使用 <code>knockd</code> 这个工具来完成这个工作。</p>
+<p>knockd 可以检测某些特定端口的特定访问，然后根据配置的规则触发一些事件。事件触发之后就可以通过命令开启某些特定的端口，然后我们就可以进行连接了。</p>
+<h3 id="安装配置-knockd"><a href="#安装配置-knockd" class="headerlink" title="安装配置 knockd"></a>安装配置 knockd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install knockd</span><br></pre></td></tr></table></figure>
+
+<p>编辑 <code>/etc/knockd.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[options]</span><br><span class="line">    LogFile       &#x3D; &#x2F;var&#x2F;log&#x2F;knockd.log</span><br><span class="line">    Interface     &#x3D; enp5s0  # 这里使用自己的网卡配置</span><br><span class="line"></span><br><span class="line">[opencloseSSH]</span><br><span class="line">    sequence      &#x3D; 7000,8000,9000</span><br><span class="line">    seq_timeout   &#x3D; 5</span><br><span class="line">    tcpflags      &#x3D; syn</span><br><span class="line">    start_command &#x3D; &#x2F;sbin&#x2F;iptables -A INPUT -s %IP% -p tcp --dport 22 -j ACCEPT</span><br><span class="line">    cmd_timeout   &#x3D; 30</span><br><span class="line">    stop_command  &#x3D; &#x2F;sbin&#x2F;iptables -D INPUT -s %IP% -p tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>以上配置详解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sequence 配置端口号序列 可以使用 22:udp 代表udp的端口号</span><br><span class="line">seq_timeout 连续访问上方序列的时间限制</span><br><span class="line">tcpflags 包的 TCP 标志</span><br><span class="line">start_command 完成序列之后执行的命令</span><br><span class="line">cmd_timeout 结束命令的时间 </span><br><span class="line">end_command 结束之后执行的命令 </span><br><span class="line">由于防火墙对已经链接成功的包不进行过滤，所以链接之后再关闭包仍然能够通过</span><br></pre></td></tr></table></figure>
+
+<p>启动 knockd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable knockd.service</span><br><span class="line">systemctl start knockd.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试-knockd"><a href="#测试-knockd" class="headerlink" title="测试 knockd"></a>测试 knockd</h3><p>测试需要安装 knock </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install knockd # 客户端和服务器在一个包里面</span><br><span class="line">brew install knock</span><br></pre></td></tr></table></figure>
+
+<p>测试上面配置文件中的端口序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ knock  -v &#123;IP&#125; 7000 8000 9000</span><br><span class="line"></span><br><span class="line">hitting tcp 10.10.10.100:7000</span><br><span class="line">hitting tcp 10.10.10.100:8000</span><br><span class="line">hitting tcp 10.10.10.100:9000</span><br></pre></td></tr></table></figure>
+
+<p>查看日志文件 <code>/var/log/knockd.log</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[2019-11-21 20:32] 10.10.10.133: opencloseSSH: OPEN SESAME</span><br><span class="line">[2019-11-21 20:32] opencloseSSH: running command: &#x2F;sbin&#x2F;iptables -A INPUT -s 10.10.10.133 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">[2019-11-21 20:32] 10.10.10.133: opencloseSSH: command timeout</span><br><span class="line">[2019-11-21 20:32] opencloseSSH: running command: &#x2F;sbin&#x2F;iptables -D INPUT -s 10.10.10.133 -p tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>以上说明配置成功了，之后每次 SSH 之前需要先使用 knock 命令敲门之后再进行连接。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li><p>knockd 所配置的敲门序列需要搭配 iptables 的包过滤才能真正发挥效果。</p>
+</li>
+<li><p>knockd 的敲门模式不只是可以用来打开端口，也可以执行其他任何操作。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ibm.com/developerworks/cn/aix/library/au-sshlocks/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/aix/library/au-sshlocks/index.html</a></p>
+<p><a href="http://linux.vbird.org/linux_security/knockd.php" target="_blank" rel="noopener">http://linux.vbird.org/linux_security/knockd.php</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

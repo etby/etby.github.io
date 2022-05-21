@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="前言最近，正在做一个新需求：需要在已有的页面中新增一种与当前数据结构完全不同的数据展示，页面展示基本不变，但后端返回数据结构与这个数据代表的意义完全不同。在产品与UI眼中，这或许并不是什么大的变动，但对程序来说却比较复杂，所有牵扯到的逻辑都需要梳理。（这或许也是产品和研发打架的原因之一） 问题分析原因一般小型项目都是 接口 -&gt; 数据库 -&gt; 界面展示 一把梭，只用一个类来定义对象，中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面数据同步与领域驱动设计">
+<meta property="og:url" content="http://blog.etby.org/2018/11/13/page-sync-and-ddd/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="前言最近，正在做一个新需求：需要在已有的页面中新增一种与当前数据结构完全不同的数据展示，页面展示基本不变，但后端返回数据结构与这个数据代表的意义完全不同。在产品与UI眼中，这或许并不是什么大的变动，但对程序来说却比较复杂，所有牵扯到的逻辑都需要梳理。（这或许也是产品和研发打架的原因之一） 问题分析原因一般小型项目都是 接口 -&gt; 数据库 -&gt; 界面展示 一把梭，只用一个类来定义对象，中">
+<meta property="article:published_time" content="2018-11-13T08:35:16.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2018/11/13/page-sync-and-ddd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>页面数据同步与领域驱动设计 | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2018/11/13/page-sync-and-ddd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          页面数据同步与领域驱动设计
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-13 16:35:16" itemprop="dateCreated datePublished" datetime="2018-11-13T16:35:16+08:00">2018-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近，正在做一个新需求：需要在已有的页面中新增一种与当前数据结构完全不同的数据展示，页面展示基本不变，但后端返回数据结构与这个数据代表的意义完全不同。在产品与UI眼中，这或许并不是什么大的变动，但对程序来说却比较复杂，所有牵扯到的逻辑都需要梳理。（这或许也是产品和研发打架的原因之一）</p>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>一般小型项目都是 <code>接口 -&gt; 数据库 -&gt; 界面展示</code> 一把梭，只用一个类来定义对象，中间不会经过任何转化和分层。一般来说数据结构很少变，而且多数据类型同一个页面展示的情况大多比较稀少，所以一般都是如此处理的。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>我这边一般想到几个方法：</p>
+<h4 id="直接修改逻辑，增加处理逻辑"><a href="#直接修改逻辑，增加处理逻辑" class="headerlink" title="直接修改逻辑，增加处理逻辑"></a>直接修改逻辑，增加处理逻辑</h4><p>这样一般改变逻辑较多，牵扯到逻辑判断的地方都要增加新数据结构的处理。</p>
+<h4 id="在已有数据对象中包含新对象"><a href="#在已有数据对象中包含新对象" class="headerlink" title="在已有数据对象中包含新对象"></a>在已有数据对象中包含新对象</h4><p>在已有对象中创建一个字段，将新对象注入，改写 <code>get</code> 类型方法，返回新对象的数据，展示到页面上。</p>
+<p>这样改动比较简单，但容易发生数据访问问题，需要多测试才行。而且侵入性太强，需要更改已有数据结构，导致逻辑混乱。</p>
+<h4 id="复制页面，不同的数据结构访问不同的页面"><a href="#复制页面，不同的数据结构访问不同的页面" class="headerlink" title="复制页面，不同的数据结构访问不同的页面"></a>复制页面，不同的数据结构访问不同的页面</h4><p>这种方法只适用于整体数据结构改变的方式，如果是局部异同，则无法解决。而且会增加界面，增加逻辑复杂度，如果界面逻辑更改，则需要两处都进行更改。</p>
+<h4 id="提取公共字段，增加抽象层，增加专用展示对象"><a href="#提取公共字段，增加抽象层，增加专用展示对象" class="headerlink" title="提取公共字段，增加抽象层，增加专用展示对象"></a>提取公共字段，增加抽象层，增加专用展示对象</h4><p>具体操作其实和直接更改类似，都是需要同样的工作量。而且由于增加了许多兼容性的处理，会导致工作量更大。</p>
+<p>好处是，兼容性足够强，再次增加逻辑方便，而且抽象提好了数据层次，对数据结构侵入性没有。</p>
+<p>坏处是，之前所有逻辑都需要更改数据结构，添加此层次。</p>
+<h4 id="将新对象转化为旧对象"><a href="#将新对象转化为旧对象" class="headerlink" title="将新对象转化为旧对象"></a>将新对象转化为旧对象</h4><p>这种方法一般是最容易实现的，但是如果需要进行空字段的处理，同样会增加工作量，比较麻烦。在整体逻辑需要用到某些数据的时候，如果没有此数据，则需要增加专用的处理逻辑。如果需要更改的地方比较少，工作量不太的话，此种方法则是一般情况下大多数人会选择的，但是会导致一些认知混乱，当然如果逻辑本身不复杂的话，一般不会出问题。</p>
+<h2 id="DataCache"><a href="#DataCache" class="headerlink" title="DataCache"></a>DataCache</h2><p><a href="https://github.com/etby/DataCache" target="_blank" rel="noopener">https://github.com/etby/DataCache</a></p>
+<p>这是一个对象缓存框架，按理说应该是一个对象池。</p>
+<p><a href="http://blog.etby.org/2018/03/27/datacache-library/">http://blog.etby.org/2018/03/27/datacache-library/</a></p>
+<p>这是我在写发布这个库的第一个版本之后，写的一篇简单介绍的博客。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在做一个应用的时候，经常会遇到各种页面之间数据同步的问题。这个基本是每个APP开发工程中都会遇到的问题，解决方式也是各式各样。</p>
+<p>在这里说一下我的方法:</p>
+<ol>
+<li>使用 <code>DataBinding</code></li>
+<li>数据对象全局唯一 ( 使用DataCache库 )</li>
+<li>在所有外部入口，比如 API、DB 都会设计一层拦截层，在这次获取字段改变，然后直接使用全局唯一对象的<code>set</code> 方法进行设置，UI 就会自动更新</li>
+</ol>
+<p>以上是核心逻辑，在整个应用中保持单个数据只使用一个<code>Java</code>对象，然后使用<code>DataBinding</code>框架触发界面更新。（ 现在则可以增加<code>LiveData</code>，使整个过程更流畅）</p>
+<p>这个方式并不优美，但是挺好用的。对于掌控整个数据流来说，只需要掌控入口，工作量会小很多。</p>
+<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><ul>
+<li>由于数据对象有可能循环引用，所以对直接传递对象和序列化有影响，处理起来比较麻烦</li>
+<li>外部数据更新比较麻烦，对于API，我这边是修改了<code>Gson</code>源码来做到自动解析的。</li>
+<li>性能问题，虽然只用一个对象能够减少内存使用，但更新的时候通知的地方也比较多，有可能会导致性能问题。</li>
+</ul>
+<h2 id="DDD-与-DataCache"><a href="#DDD-与-DataCache" class="headerlink" title="DDD 与 DataCache"></a>DDD 与 DataCache</h2><p>领域驱动设计虽然之前自己查了很多资料，也看了一些书，但始终不得要领，而且无法进行实际的运用。毕竟增加了许多工作量，我却无法灵活使用，不熟的东西还是不适合使用。</p>
+<p>处理上面提到的增加页面数据的问题时，我想到了 <code>DataCache</code> 库，想到了它的优缺点和我现在的窘境，之后想到的 <code>DDD</code> 的分层。对数据结构的分层：<code>VO/PO/DTO</code> 等等。</p>
+<h3 id="DDD-的优缺点"><a href="#DDD-的优缺点" class="headerlink" title="DDD 的优缺点"></a>DDD 的优缺点</h3><ul>
+<li>分层、解耦</li>
+<li>对逻辑更改的容忍度比较好 ( 只需要在其中一些层进行更改, 这也是所有分层设计都具备的优点 )</li>
+<li>对数据影响力的限制 ( 应用=数据+算法, 但如果数据的实用性和扩散度太高, 会导致逻辑(算法)被牵制 )</li>
+<li>穿透性有影响，会影响一些代码的通用性，增加工作量</li>
+<li>学习和理解起来比较困难</li>
+</ul>
+<h3 id="使用-DDD-的一部分"><a href="#使用-DDD-的一部分" class="headerlink" title="使用 DDD 的一部分"></a>使用 DDD 的一部分</h3><p>虽然 DDD 比较庞大，但其实我们已经有意无意的使用了类似的思想。比如上面页面问题提出公共数据对象的方式，或者聚合数据对象的方式，都是表现层分层的一种思想，那些对象已经类似<code>VO</code>了。</p>
+<p>我们则可以做的更好，将<code>VO</code>完全独立出来，然后使用<code>DataCache</code>将<code>VO</code>单例化。这样就可以解决多页面的数据同步问题，在逻辑需要用到数据的时候则可以使用真实数据对象来进行操作。这样就可以避开单对象的循环引用的问题，序列化和传递对象则不必太拘束。</p>
+<p>逻辑层和展现层使用完全不同的数据结构，当逻辑改变时，则就不需要进行大量的更改，只需要在层与层之间进行一些转化。或许这样做之后，增加的学习成本和工作量则不再是阻碍了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/30/rn-native-modules/" rel="prev" title="ReactNative 添加本地模块">
+      <i class="fa fa-chevron-left"></i> ReactNative 添加本地模块
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/27/linux-init/" rel="next" title="Linux 初始化配置">
+      Linux 初始化配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">2.2.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接修改逻辑，增加处理逻辑"><span class="nav-number">2.2.1.</span> <span class="nav-text">直接修改逻辑，增加处理逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在已有数据对象中包含新对象"><span class="nav-number">2.2.2.</span> <span class="nav-text">在已有数据对象中包含新对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制页面，不同的数据结构访问不同的页面"><span class="nav-number">2.2.3.</span> <span class="nav-text">复制页面，不同的数据结构访问不同的页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提取公共字段，增加抽象层，增加专用展示对象"><span class="nav-number">2.2.4.</span> <span class="nav-text">提取公共字段，增加抽象层，增加专用展示对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将新对象转化为旧对象"><span class="nav-number">2.2.5.</span> <span class="nav-text">将新对象转化为旧对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataCache"><span class="nav-number">3.</span> <span class="nav-text">DataCache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">3.1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些问题"><span class="nav-number">3.2.</span> <span class="nav-text">一些问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDD-与-DataCache"><span class="nav-number">4.</span> <span class="nav-text">DDD 与 DataCache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDD-的优缺点"><span class="nav-number">4.1.</span> <span class="nav-text">DDD 的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-DDD-的一部分"><span class="nav-number">4.2.</span> <span class="nav-text">使用 DDD 的一部分</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

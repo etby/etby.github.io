@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="经验总结我的集群是自建的独立 ETCD 集群，然后其他组件全部用 kubeadm 来进行安装的，升级起来比较方便。 一般来说，只有第一台 Master 需要的操作比较多，后续的 Master 和 Node 操作基本相同。如果经常升级的话，倒是可以写一个脚本去做，我因为第一次做 K8S 的升级。不太熟，所以全程手动升级的。 过程中使用 Tmux 进行远程链接安全性的保证。如果因为某些操作中途中断导致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将 Kubernetes 从 1.17 升级到 1.18">
+<meta property="og:url" content="http://blog.etby.org/2020/04/24/migrat-k8s-1-17-to-1-18/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="经验总结我的集群是自建的独立 ETCD 集群，然后其他组件全部用 kubeadm 来进行安装的，升级起来比较方便。 一般来说，只有第一台 Master 需要的操作比较多，后续的 Master 和 Node 操作基本相同。如果经常升级的话，倒是可以写一个脚本去做，我因为第一次做 K8S 的升级。不太熟，所以全程手动升级的。 过程中使用 Tmux 进行远程链接安全性的保证。如果因为某些操作中途中断导致">
+<meta property="article:published_time" content="2020-04-24T13:58:56.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2020/04/24/migrat-k8s-1-17-to-1-18/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>将 Kubernetes 从 1.17 升级到 1.18 | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/24/migrat-k8s-1-17-to-1-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          将 Kubernetes 从 1.17 升级到 1.18
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-24 21:58:56" itemprop="dateCreated datePublished" datetime="2020-04-24T21:58:56+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><p>我的集群是自建的独立 ETCD 集群，然后其他组件全部用 kubeadm 来进行安装的，升级起来比较方便。</p>
+<p>一般来说，只有第一台 Master 需要的操作比较多，后续的 Master 和 Node 操作基本相同。如果经常升级的话，倒是可以写一个脚本去做，我因为第一次做 K8S 的升级。不太熟，所以全程手动升级的。</p>
+<p>过程中使用 Tmux 进行远程链接安全性的保证。如果因为某些操作中途中断导致升级失败，那麻烦就大了。</p>
+<h2 id="升级要求"><a href="#升级要求" class="headerlink" title="升级要求"></a>升级要求</h2><ul>
+<li>必须在 1.17 以上版本</li>
+<li>必须使用外部 ETCD</li>
+<li>切记备份数据</li>
+</ul>
+<h2 id="确定目标版本"><a href="#确定目标版本" class="headerlink" title="确定目标版本"></a>确定目标版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt-cache madison kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>得到最新版本 <code>1.18.2-00</code></p>
+<h2 id="升级主节点集群"><a href="#升级主节点集群" class="headerlink" title="升级主节点集群"></a>升级主节点集群</h2><h3 id="开始升级第一个主节点"><a href="#开始升级第一个主节点" class="headerlink" title="开始升级第一个主节点"></a>开始升级第一个主节点</h3><p>升级 kubeadm </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubeadm &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubeadm&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>确认版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm version</span><br></pre></td></tr></table></figure>
+
+<p>清空节点上的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl drain &lt;cp-node-name&gt; --ignore-daemonsets</span><br></pre></td></tr></table></figure>
+
+<p>在需要升级的节点上运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade plan</span><br></pre></td></tr></table></figure>
+
+<p>选择要升级到的版本，然后运行相应的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade apply v1.18.2</span><br></pre></td></tr></table></figure>
+
+<p>升级完成之后需要升级 kubelet 和 kubectl ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubelet kubectl &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubelet&#x3D;1.18.2-00 kubectl&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubelet kubectl</span><br></pre></td></tr></table></figure>
+
+<p>重启 kubelet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<p>取消节点限制策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl uncordon &lt;cp-node-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="升级其他主节点"><a href="#升级其他主节点" class="headerlink" title="升级其他主节点"></a>升级其他主节点</h3><p>先升级 kubeadm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubeadm &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubeadm&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubeadm</span><br></pre></td></tr></table></figure>
+
+<p>然后清空节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl drain &lt;cp-node-name&gt; --ignore-daemonsets</span><br></pre></td></tr></table></figure>
+
+<p>执行升级命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm upgrade node</span><br></pre></td></tr></table></figure>
+
+<p>升级完成之后需要升级 kubelet 和 kubectl ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-mark unhold kubelet kubectl &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; apt-get install -y kubelet&#x3D;1.18.2-00 kubectl&#x3D;1.18.2-00 &amp;&amp; \</span><br><span class="line">apt-mark hold kubelet kubectl</span><br></pre></td></tr></table></figure>
+
+<p>重启 kubelet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<p>取消节点限制策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl uncordon &lt;cp-node-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="升级工作节点"><a href="#升级工作节点" class="headerlink" title="升级工作节点"></a>升级工作节点</h2><p>升级工作节点的步骤与升级其他主节点步骤相同。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>网络插件按需升级，我这边暂时没有升级的需求，就没有升级了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/</a></p>
+</li>
+<li><p><a href="https://mritd.me/2020/01/21/how-to-upgrade-kubeadm-cluster/" target="_blank" rel="noopener">https://mritd.me/2020/01/21/how-to-upgrade-kubeadm-cluster/</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/05/openwrt-config/" rel="prev" title="OpenWrt 路由器配置">
+      <i class="fa fa-chevron-left"></i> OpenWrt 路由器配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/26/k8s-release-app/" rel="next" title="在 K8S 集群上发布应用">
+      在 K8S 集群上发布应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经验总结"><span class="nav-number">1.</span> <span class="nav-text">经验总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级要求"><span class="nav-number">2.</span> <span class="nav-text">升级要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定目标版本"><span class="nav-number">3.</span> <span class="nav-text">确定目标版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级主节点集群"><span class="nav-number">4.</span> <span class="nav-text">升级主节点集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始升级第一个主节点"><span class="nav-number">4.1.</span> <span class="nav-text">开始升级第一个主节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级其他主节点"><span class="nav-number">4.2.</span> <span class="nav-text">升级其他主节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级工作节点"><span class="nav-number">5.</span> <span class="nav-text">升级工作节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

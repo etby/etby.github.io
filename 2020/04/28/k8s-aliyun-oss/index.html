@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="插件选择Kubernetes 与外部存储对接时要使用插件，自定义插件有很多协议。阿里云支持的插件为 Flexvolume 和 CSI，需要选择用哪一个插件搭建系统。由于 CSI 比较新，而且社区推荐使用，我这边就选择了 CSI。 FlexvolumeFlexvolume插件是Kubernetes社区较早实现的存储卷扩展机制。ACK从上线起，即支持Flexvolume类型数据卷服务。Flexvolu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes 使用 Aliyun OSS 作为持久化存储">
+<meta property="og:url" content="http://blog.etby.org/2020/04/28/k8s-aliyun-oss/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="插件选择Kubernetes 与外部存储对接时要使用插件，自定义插件有很多协议。阿里云支持的插件为 Flexvolume 和 CSI，需要选择用哪一个插件搭建系统。由于 CSI 比较新，而且社区推荐使用，我这边就选择了 CSI。 FlexvolumeFlexvolume插件是Kubernetes社区较早实现的存储卷扩展机制。ACK从上线起，即支持Flexvolume类型数据卷服务。Flexvolu">
+<meta property="article:published_time" content="2020-04-28T00:26:52.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Aliyun OSS">
+<meta property="article:tag" content="CSI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2020/04/28/k8s-aliyun-oss/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Kubernetes 使用 Aliyun OSS 作为持久化存储 | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/28/k8s-aliyun-oss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes 使用 Aliyun OSS 作为持久化存储
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-28 08:26:52" itemprop="dateCreated datePublished" datetime="2020-04-28T08:26:52+08:00">2020-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="插件选择"><a href="#插件选择" class="headerlink" title="插件选择"></a>插件选择</h2><p><code>Kubernetes</code> 与外部存储对接时要使用插件，自定义插件有很多协议。阿里云支持的插件为 <code>Flexvolume</code> 和 <code>CSI</code>，需要选择用哪一个插件搭建系统。由于 CSI 比较新，而且社区推荐使用，我这边就选择了 CSI。</p>
+<h3 id="Flexvolume"><a href="#Flexvolume" class="headerlink" title="Flexvolume"></a>Flexvolume</h3><p>Flexvolume插件是Kubernetes社区较早实现的存储卷扩展机制。ACK从上线起，即支持Flexvolume类型数据卷服务。Flexvolume插件包括以下三部分。</p>
+<ul>
+<li>Flexvolume：负责数据卷的挂载、卸载功能。ACK默认提供云盘、NAS、OSS三种存储卷的挂载能力。</li>
+<li>Disk-Controller：负责云盘卷的自动创建能力。</li>
+<li>Nas-Controller：负责NAS卷的自动创建能力。</li>
+</ul>
+<h3 id="CSI"><a href="#CSI" class="headerlink" title="CSI"></a>CSI</h3><p>CSI插件是当前Kubernetes社区推荐的插件实现方案。ACK集群提供的CSI存储插件兼容社区的CSI特性。CSI插件包括以下两部分：</p>
+<ul>
+<li>CSI-Plugin：实现数据卷的挂载、卸载功能。ACK默认提供云盘、NAS、OSS三种存储卷的挂载能力。</li>
+<li>CSI-Provisioner：实现数据卷的自动创建能力，目前支持云盘、NAS两种存储卷创建能力。</li>
+</ul>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create namespace cloud-retirwer-k8s-plugin</span><br></pre></td></tr></table></figure>
+
+<h3 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h3><p>下载 RBAC 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;deploy&#x2F;rbac.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>namespace</code> ，后续的所有配置也都要修改命名空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin</span><br><span class="line">  # replace with the same namespace name with plugin</span><br><span class="line">  namespace: cloud-retirwer-k8s-plugin</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 省略权限配置</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">apiVersion: rbac.authorization.k8s.io&#x2F;v1</span><br><span class="line">metadata:</span><br><span class="line">  name: alicloud-csi-plugin</span><br><span class="line">subjects:</span><br><span class="line">  - kind: ServiceAccount</span><br><span class="line">    name: admin</span><br><span class="line">    namespace: cloud-retirwer-k8s-plugin</span><br><span class="line">roleRef:</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: alicloud-csi-plugin</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f rbac.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="OSS-Plugin"><a href="#OSS-Plugin" class="headerlink" title="OSS-Plugin"></a>OSS-Plugin</h3><p>下载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;deploy&#x2F;oss&#x2F;oss-plugin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>namespace</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kind: DaemonSet</span><br><span class="line">apiVersion: apps&#x2F;v1beta2</span><br><span class="line">metadata:</span><br><span class="line">  name: csi-ossplugin</span><br><span class="line">  namespace: cloud-retirwer-k8s-plugin</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f oss-plugin.yaml</span><br></pre></td></tr></table></figure>
+
+<p>常见问题如下，k8s 高版本对于 beta 版 API 有所更改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: unable to recognize &quot;oss-plugin.yaml&quot;: no matches for kind &quot;DaemonSet&quot; in version &quot;apps&#x2F;v1beta2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果碰见以上问题 ，则将版本修改为 V1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kind: DaemonSet</span><br><span class="line">apiVersion: apps&#x2F;v1</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote>
+<p> 需要提前创建好 OSS Bucket，配置好权限，获得访问密钥。</p>
+</blockquote>
+<p>下载测试配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;deploy.yaml</span><br><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;pv.yaml</span><br><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes-sigs&#x2F;alibaba-cloud-csi-driver&#x2F;master&#x2F;examples&#x2F;oss&#x2F;pvc.yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: oss-csi-pv</span><br><span class="line">  labels:</span><br><span class="line">    alicloud-pvname: oss-csi-pv</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 5Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteOnce</span><br><span class="line">  persistentVolumeReclaimPolicy: Retain</span><br><span class="line">  csi:</span><br><span class="line">    driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">    # set volumeHandle same value pv name</span><br><span class="line">    volumeHandle: oss-csi-pv</span><br><span class="line">    volumeAttributes:</span><br><span class="line">      bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">      url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">      otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">      akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">      akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">      path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p>加载配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br><span class="line">kubectl apply -f pvc.yaml</span><br><span class="line">kubectl apply -f deploy.yaml</span><br></pre></td></tr></table></figure>
+
+<p>检查运行状态，如果三个都正常就没问题了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pv | grep oss</span><br><span class="line">kubectl get pvc | grep oss</span><br><span class="line">kubectl get pod | grep oss</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h3><p>使用此 CSI 主要是需要在定义 PV 的配置中做特殊配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: pv-name</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 5Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteOnce</span><br><span class="line">  # 回收模式 一定要选保留</span><br><span class="line">  persistentVolumeReclaimPolicy: Retain</span><br><span class="line">  csi:</span><br><span class="line">    driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">    # set volumeHandle same value pv name</span><br><span class="line">    volumeHandle: oss-csi-pv</span><br><span class="line">    volumeAttributes:</span><br><span class="line">      bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">      url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">      otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">      akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">      akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">      path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="存储大小"><a href="#存储大小" class="headerlink" title="存储大小"></a>存储大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 定义存储大小，Gi 代表以 1024 的算法进行计算大小</span><br><span class="line">capacity:</span><br><span class="line">	storage: 5Gi</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问模式"><a href="#访问模式" class="headerlink" title="访问模式"></a>访问模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 访问模式 OSS 支持 ReadWriteMany</span><br><span class="line">accessModes:</span><br><span class="line">	- ReadWriteOnce</span><br></pre></td></tr></table></figure>
+
+<h4 id="回收模式"><a href="#回收模式" class="headerlink" title="回收模式"></a>回收模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">persistentVolumeReclaimPolicy: Retain</span><br></pre></td></tr></table></figure>
+
+<p>回收模式一般要选保留，不排除特殊情况</p>
+<h4 id="CSI-1"><a href="#CSI-1" class="headerlink" title="CSI"></a>CSI</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">csi:</span><br><span class="line">  driver: ossplugin.csi.alibabacloud.com</span><br><span class="line">  volumeHandle: oss-csi-pv</span><br><span class="line">  volumeAttributes:</span><br><span class="line">    bucket: &quot;&lt;*&gt;&quot;</span><br><span class="line">    url: &quot;oss-cn-hangzhou.aliyuncs.com&quot;</span><br><span class="line">    otherOpts: &quot;-o max_stat_cache_size&#x3D;0 -o allow_other&quot;</span><br><span class="line">    akId: &quot;&lt;*&gt;&quot;</span><br><span class="line">    akSecret: &quot;&lt;*&gt;&quot;</span><br><span class="line">    path: &quot;&#x2F;test&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>driver</code> 是所要挂载的驱动，需要和之前安装的相同，如果你用其他厂家或者是不同的产品，根据情况调整。<code>volumeHandle</code> 唯一标识从 CSI 卷插件的 <code>CreateVolume</code> 调用返回的卷名。随后在卷驱动程序的所有后续调用中使用卷句柄来引用该卷，一般和 PV 名称相同。<code>volumeAttributes</code> 则是外部服务提供商自己定义的值，OSS 目前是这些配置，其他厂家有不同的配置。</p>
+<h3 id="PVC"><a href="#PVC" class="headerlink" title="PVC"></a>PVC</h3><p>不需要做特殊配置。选择器需要匹配自己想要使用的 PV。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: oss-pvc</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">  - ReadWriteOnce</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 5Gi</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      alicloud-pvname: oss-csi-pv</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver/blob/master/README-zh_CN.md" target="_blank" rel="noopener">https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver/blob/master/README-zh_CN.md</a></p>
+</li>
+<li><p><a href="https://help.aliyun.com/document_detail/157026.html" target="_blank" rel="noopener">https://help.aliyun.com/document_detail/157026.html</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Aliyun-OSS/" rel="tag"># Aliyun OSS</a>
+              <a href="/tags/CSI/" rel="tag"># CSI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/26/k8s-release-app/" rel="prev" title="在 K8S 集群上发布应用">
+      <i class="fa fa-chevron-left"></i> 在 K8S 集群上发布应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/k8s-install-harbor/" rel="next" title="使用 Helm 在 Kubernetes 集群中安装 Harbor">
+      使用 Helm 在 Kubernetes 集群中安装 Harbor <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#插件选择"><span class="nav-number">1.</span> <span class="nav-text">插件选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flexvolume"><span class="nav-number">1.1.</span> <span class="nav-text">Flexvolume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSI"><span class="nav-number">1.2.</span> <span class="nav-text">CSI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装插件"><span class="nav-number">2.</span> <span class="nav-text">安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间"><span class="nav-number">2.1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBAC"><span class="nav-number">2.2.</span> <span class="nav-text">RBAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS-Plugin"><span class="nav-number">2.3.</span> <span class="nav-text">OSS-Plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">2.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PV"><span class="nav-number">3.1.</span> <span class="nav-text">PV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储大小"><span class="nav-number">3.1.1.</span> <span class="nav-text">存储大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问模式"><span class="nav-number">3.1.2.</span> <span class="nav-text">访问模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回收模式"><span class="nav-number">3.1.3.</span> <span class="nav-text">回收模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSI-1"><span class="nav-number">3.1.4.</span> <span class="nav-text">CSI</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PVC"><span class="nav-number">3.2.</span> <span class="nav-text">PVC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

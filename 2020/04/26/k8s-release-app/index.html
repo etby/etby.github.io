@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="应用介绍目标是将公司网站发布到集群中。前期准备：域名备案，编写代码与打包镜像。由于目前还是简易的纯前端展示页面，以及基础设施还不太完善，我就直接将镜像放到 DockerHub 上了。 源码https:&#x2F;&#x2F;github.com&#x2F;Retirwer&#x2F;www.retirwer.com 镜像https:&#x2F;&#x2F;hub.docker.com&#x2F;repository&#x2F;docker&#x2F;retirwer&#x2F;www.retir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 K8S 集群上发布应用">
+<meta property="og:url" content="http://blog.etby.org/2020/04/26/k8s-release-app/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="应用介绍目标是将公司网站发布到集群中。前期准备：域名备案，编写代码与打包镜像。由于目前还是简易的纯前端展示页面，以及基础设施还不太完善，我就直接将镜像放到 DockerHub 上了。 源码https:&#x2F;&#x2F;github.com&#x2F;Retirwer&#x2F;www.retirwer.com 镜像https:&#x2F;&#x2F;hub.docker.com&#x2F;repository&#x2F;docker&#x2F;retirwer&#x2F;www.retir">
+<meta property="article:published_time" content="2020-04-26T14:23:42.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Helm">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2020/04/26/k8s-release-app/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>在 K8S 集群上发布应用 | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/04/26/k8s-release-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 K8S 集群上发布应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-26 22:23:42" itemprop="dateCreated datePublished" datetime="2020-04-26T22:23:42+08:00">2020-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="应用介绍"><a href="#应用介绍" class="headerlink" title="应用介绍"></a>应用介绍</h2><p>目标是将公司网站发布到集群中。前期准备：域名备案，编写代码与打包镜像。由于目前还是简易的纯前端展示页面，以及基础设施还不太完善，我就直接将镜像放到 DockerHub 上了。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p><a href="https://github.com/Retirwer/www.retirwer.com" target="_blank" rel="noopener">https://github.com/Retirwer/www.retirwer.com</a></p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p><a href="https://hub.docker.com/repository/docker/retirwer/www.retirwer.com" target="_blank" rel="noopener">https://hub.docker.com/repository/docker/retirwer/www.retirwer.com</a></p>
+<h2 id="集群环境"><a href="#集群环境" class="headerlink" title="集群环境"></a>集群环境</h2><h3 id="CertManager"><a href="#CertManager" class="headerlink" title="CertManager"></a>CertManager</h3><p>用来自动申请 HTTPS 证书。</p>
+<h3 id="Helm"><a href="#Helm" class="headerlink" title="Helm"></a>Helm</h3><p>用来进行 Kubernetes 应用的管理。</p>
+<h2 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h2><h3 id="创建-Helm-Chars"><a href="#创建-Helm-Chars" class="headerlink" title="创建 Helm Chars"></a>创建 Helm Chars</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm create www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<p>由于基本模板对于简单的展示站够用，目前只需要修改 <code>Chart.yaml</code> 和 <code>values.yaml</code> 文件即可。</p>
+<h3 id="Chart-yaml"><a href="#Chart-yaml" class="headerlink" title="Chart.yaml"></a>Chart.yaml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v2</span><br><span class="line">name: www.retirwer.com</span><br><span class="line">description: Retirwer Technology Co., Ltd Official Web Site.</span><br><span class="line">type: application</span><br><span class="line">version: 0.1.0</span><br><span class="line">appVersion: 0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="values-yaml"><a href="#values-yaml" class="headerlink" title="values.yaml"></a>values.yaml</h3><p>修改镜像，版本则和 <code>appVersion</code> 相同，后续更改版本只需要修改 <code>Chart.yaml</code> 中的 <code>appVersion</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image:</span><br><span class="line">  repository: retirwer&#x2F;www.retirwer.com</span><br><span class="line">  pullPolicy: IfNotPresen</span><br></pre></td></tr></table></figure>
+
+<p>配置 <code>Ingress</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ingress:</span><br><span class="line">  enabled: true</span><br><span class="line">  annotations:</span><br><span class="line">    # 使用 Nginx-Ingress 的配置</span><br><span class="line">    kubernetes.io&#x2F;ingress.class: nginx</span><br><span class="line">    # 根据自己的 cert-manager 的配置修改</span><br><span class="line">    cert-manager.io&#x2F;cluster-issuer: letsencrypt-prod</span><br><span class="line">  hosts:</span><br><span class="line">    - host: www.retirwer.com</span><br><span class="line">    	# 只配置根目录</span><br><span class="line">      paths: [&#x2F;]</span><br><span class="line">  tls:</span><br><span class="line">   - secretName: www.retirwer.com-tls</span><br><span class="line">     hosts:</span><br><span class="line">       - www.retirwer.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>对于其他用不到的配置模版可以删掉，也可以不启用。</li>
+</ul>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>一般必须指定命名空间，如果不指定则使用当前命名空间。</p>
+<h3 id="确认发布配置"><a href="#确认发布配置" class="headerlink" title="确认发布配置"></a>确认发布配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --debug --dry-run</span><br></pre></td></tr></table></figure>
+
+<h3 id="首次发布"><a href="#首次发布" class="headerlink" title="首次发布"></a>首次发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新发布"><a href="#更新发布" class="headerlink" title="更新发布"></a>更新发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm upgrade &lt;release-name&gt; . --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="卸载发布"><a href="#卸载发布" class="headerlink" title="卸载发布"></a>卸载发布</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm uninstall &lt;release-name&gt; --namespace &lt;namespace&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/24/migrat-k8s-1-17-to-1-18/" rel="prev" title="将 Kubernetes 从 1.17 升级到 1.18">
+      <i class="fa fa-chevron-left"></i> 将 Kubernetes 从 1.17 升级到 1.18
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/k8s-aliyun-oss/" rel="next" title="Kubernetes 使用 Aliyun OSS 作为持久化存储">
+      Kubernetes 使用 Aliyun OSS 作为持久化存储 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用介绍"><span class="nav-number">1.</span> <span class="nav-text">应用介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像"><span class="nav-number">1.2.</span> <span class="nav-text">镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群环境"><span class="nav-number">2.</span> <span class="nav-text">集群环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CertManager"><span class="nav-number">2.1.</span> <span class="nav-text">CertManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Helm"><span class="nav-number">2.2.</span> <span class="nav-text">Helm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用配置"><span class="nav-number">3.</span> <span class="nav-text">应用配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Helm-Chars"><span class="nav-number">3.1.</span> <span class="nav-text">创建 Helm Chars</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chart-yaml"><span class="nav-number">3.2.</span> <span class="nav-text">Chart.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values-yaml"><span class="nav-number">3.3.</span> <span class="nav-text">values.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确认发布配置"><span class="nav-number">4.1.</span> <span class="nav-text">确认发布配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首次发布"><span class="nav-number">4.2.</span> <span class="nav-text">首次发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新发布"><span class="nav-number">4.3.</span> <span class="nav-text">更新发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载发布"><span class="nav-number">4.4.</span> <span class="nav-text">卸载发布</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

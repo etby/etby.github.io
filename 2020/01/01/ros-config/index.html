@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://blog.etby.org').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="基本操作ROS 命令行一个命令其实逻辑上会进入到对应的目录，只有最后一个执行文件才会真正执行，所以可以用这种操作简化命令输入。 1234567891011121314151617181920212223242526272829303132333435# 输入 system 其实进入了 system 目录， 之后进入 routerboard 目录，[admin@MikroTik] &gt; syst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RouterOS 配置">
+<meta property="og:url" content="http://blog.etby.org/2020/01/01/ros-config/index.html">
+<meta property="og:site_name" content="Etby Gao">
+<meta property="og:description" content="基本操作ROS 命令行一个命令其实逻辑上会进入到对应的目录，只有最后一个执行文件才会真正执行，所以可以用这种操作简化命令输入。 1234567891011121314151617181920212223242526272829303132333435# 输入 system 其实进入了 system 目录， 之后进入 routerboard 目录，[admin@MikroTik] &gt; syst">
+<meta property="article:published_time" content="2020-01-01T03:12:14.000Z">
+<meta property="article:modified_time" content="2022-05-21T02:42:06.515Z">
+<meta property="article:author" content="Etby">
+<meta property="article:tag" content="RouterOS">
+<meta property="article:tag" content="Router">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.etby.org/2020/01/01/ros-config/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>RouterOS 配置 | Etby Gao</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Etby Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">格物、致知、诚意、正心</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.etby.org/2020/01/01/ros-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Etby">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Etby Gao">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RouterOS 配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-01 11:12:14" itemprop="dateCreated datePublished" datetime="2020-01-01T11:12:14+08:00">2020-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-21 10:42:06" itemprop="dateModified" datetime="2022-05-21T10:42:06+08:00">2022-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>ROS 命令行一个命令其实逻辑上会进入到对应的目录，只有最后一个执行文件才会真正执行，所以可以用这种操作简化命令输入。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入 system 其实进入了 system 目录， 之后进入 routerboard 目录，</span></span><br><span class="line">[admin@MikroTik] &gt; system</span><br><span class="line">[admin@MikroTik] /system&gt; routerboard</span><br><span class="line">[admin@MikroTik] /system routerboard&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 再输入最后的可执行命令，就执行了 <span class="built_in">print</span> 命令</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; print</span><br><span class="line">       routerboard: yes</span><br><span class="line">             model: RB4011iGS+</span><br><span class="line">     serial-number: B8FF0B97D030</span><br><span class="line">     firmware-type: al2</span><br><span class="line">  factory-firmware: 6.44.5</span><br><span class="line">  current-firmware: 6.44.6</span><br><span class="line">  upgrade-firmware: 6.44.6</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果想回到根目录，使用 /</span></span><br><span class="line">[admin@MikroTik] /system routerboard&gt; /</span><br><span class="line">[admin@MikroTik] &gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在命令行中随时输入 ？ 会弹出命令和帮助</span></span><br><span class="line">[admin@MikroTik] /ip address&gt;</span><br><span class="line">IP addresses are given to router to access it remotely and to specify it as a gateway for other hosts/routers.</span><br><span class="line"></span><br><span class="line">.. -- go up to ip</span><br><span class="line">add -- Create a new item</span><br><span class="line">comment -- Set comment for items</span><br><span class="line">disable -- Disable items</span><br><span class="line">edit --</span><br><span class="line">enable -- Enable items</span><br><span class="line">export -- Print or save an export script that can be used to restore configuration</span><br><span class="line">find -- Find items by value</span><br><span class="line">get -- Gets value of item's property</span><br><span class="line">print -- Print values of item properties</span><br><span class="line">remove -- Remove item</span><br><span class="line">set -- Change item properties</span><br></pre></td></tr></table></figure>
+
+<h2 id="新机联网"><a href="#新机联网" class="headerlink" title="新机联网"></a>新机联网</h2><h3 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改默认的空密码为自定义的密码</span><br><span class="line">&#x2F;password</span><br><span class="line"></span><br><span class="line"># 关闭一些不用的服务 （ 我这边只保留了 ssh 和 winbox ）</span><br><span class="line">&#x2F;ip service disable telnet,ftp,www,api,api-ssl</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置公网"><a href="#配置公网" class="headerlink" title="配置公网"></a>配置公网</h3><p>由于目前都是光猫直接拨号，一般情况只需要配置IP即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 修改与光猫连接端口名称 </span><br><span class="line">&#x2F;interface ethernet set ether1 name&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 配置光猫内网IP 针对与光猫链接的端口</span><br><span class="line">&#x2F;ip address add address&#x3D;192.168.1.2&#x2F;24 interface&#x3D;WAN-CT-HOME</span><br><span class="line"></span><br><span class="line"># 可以尝试 ping 光猫测试是否成功</span><br><span class="line">&#x2F;ping 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="内网配置"><a href="#内网配置" class="headerlink" title="内网配置"></a>内网配置</h3><p><strong>网络配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 新建网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 将接口加入网桥</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;bridge</span><br><span class="line"></span><br><span class="line"># 添加默认网关</span><br><span class="line">&#x2F;ip route add gateway&#x3D;192.168.1.1</span><br><span class="line"></span><br><span class="line"># 出口 SNAT 转换</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;srcnat action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>DNS 和 DHCP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 配置 DNS 并且允许其他设备访问</span><br><span class="line">&#x2F;ip dns set servers&#x3D;1.1.1.1,114.114.114.114 allow-remote-requests&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 新建 IP 池</span><br><span class="line">&#x2F;ip pool add ranges&#x3D;10.10.10.100-10.10.10.200 name&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 建立 DHCP 服务器</span><br><span class="line">&#x2F;ip dhcp-server add name&#x3D;NET-DHCP interface&#x3D;bridge address-pool&#x3D;NET-POOL</span><br><span class="line"></span><br><span class="line"># 配置 DHCP 网络</span><br><span class="line">&#x2F;ip dhcp-server network add address&#x3D;10.10.10.0&#x2F;24 dns-server&#x3D;10.10.10.1 gateway&#x3D;10.10.10.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h2><h3 id="内网-VLAN-配置"><a href="#内网-VLAN-配置" class="headerlink" title="内网 VLAN 配置"></a>内网 VLAN 配置</h3><p><strong>网桥</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 新建支持 VLAN 的网桥</span><br><span class="line">&#x2F;interface bridge add name&#x3D;bridge vlan-filtering&#x3D;no</span><br><span class="line"></span><br><span class="line"># 将端口加入网桥 并配置 VLAN</span><br><span class="line">&#x2F;interface bridge port add bridge&#x3D;bridge interface&#x3D;ether5 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">&#x2F;interface bridge prot add bridge&#x3D;bridge interface&#x3D;ether6 pvid&#x3D;10 hw&#x3D;yes</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 在网桥上新建路由器使用的 VLAN</span><br><span class="line">&#x2F;interface vlan add interface&#x3D;bridge name&#x3D;VLAN-NET vlan-id&#x3D;10</span><br><span class="line"></span><br><span class="line"># 在 VLAN 上绑定 IP</span><br><span class="line">&#x2F;ip address add address&#x3D;10.10.10.1&#x2F;24 interface&#x3D;VLAN-NET</span><br></pre></td></tr></table></figure>
+
+<p><strong>VLAN</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 开启入口流量过滤 提高安全性</span><br><span class="line">&#x2F;interface bridge port </span><br><span class="line">set [f] ingress-filtering&#x3D;yes</span><br><span class="line"></span><br><span class="line"># 设置网桥端口过滤 VLAN 标签模式</span><br><span class="line">&#x2F;interface bridge port</span><br><span class="line"># 允许所有类型帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-all</span><br><span class="line"># 只允许打了合适 VLAN 标签的帧通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-vlan-tagged</span><br><span class="line"># 允许未打标签和优先标签通过</span><br><span class="line">set [find where interface&#x3D;&lt;接口&gt;] frame-types&#x3D;admit-only-untagged-and-priority-tagged</span><br><span class="line"></span><br><span class="line"># 配置网桥 VLAN</span><br><span class="line"># 针对 VLAN 10，sfp1 打标签，ether1,ether2 去掉标签</span><br><span class="line">add bridge&#x3D;bridge vlan-ids&#x3D;10 tagged&#x3D;sfp1 untagged&#x3D;ether1,ether2 </span><br><span class="line"># 如果网桥自身也要转发，需要配置网桥自身</span><br><span class="line">add bridge&#x3D;bridge tagged&#x3D;bridge,ether1 vlan-ids&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p><strong>查看现有的NAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[admin@MikroTik] &#x2F;ip firewall nat&gt; print</span><br><span class="line">Flags: X - disabled, I - invalid, D - dynamic</span><br><span class="line"> 0    ;;; defconf: masquerade</span><br><span class="line">      chain&#x3D;srcnat action&#x3D;masquerade out-interface-list&#x3D;WAN ipsec-policy&#x3D;out,none</span><br></pre></td></tr></table></figure>
+
+<p>目前是默认配置，对于所有 WAN 接口列表中的接口，都使用改变源IP的方式做NAT。</p>
+<h4 id="配置端口转发"><a href="#配置端口转发" class="headerlink" title="配置端口转发"></a><strong>配置端口转发</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将外网8000端口映射到内网服务器上的80端口</span><br><span class="line">&#x2F;ip firewall nat add chain&#x3D;dstnat protocol&#x3D;tcp dst-port&#x3D;8000 in-interface&#x3D;ether5 action&#x3D;dst-nat to-addresses&#x3D;10.10.10.80 to-ports&#x3D;80</span><br></pre></td></tr></table></figure>
+
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 允许已经建立的链接通过</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input connection-state&#x3D;established,related in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br><span class="line"># 过滤掉所有的外部链接进入</span><br><span class="line">&#x2F;ip firewall filter add chain&#x3D;input in-interface&#x3D;WAN-CT-DIRECT action&#x3D;drop</span><br></pre></td></tr></table></figure>
+
+<h3 id="WAN-负载均衡"><a href="#WAN-负载均衡" class="headerlink" title="WAN 负载均衡"></a>WAN 负载均衡</h3><p><strong>标记公网网卡进入的链接</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle</span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-DIRECT connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_DIRECT </span><br><span class="line">add action&#x3D;mark-connection chain&#x3D;prerouting in-interface&#x3D;WAN-CT-HOME connection-mark&#x3D;no-mark new-connection-mark&#x3D;WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建 PCC 规则</strong></p>
+<p><a href="https://wiki.mikrotik.com/wiki/Manual:PCC" target="_blank" rel="noopener">https://wiki.mikrotik.com/wiki/Manual:PCC</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 未标记的内网流量根据算法选择路由出去</span><br><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_DIRECT per-connection-classifier&#x3D;both-address:2&#x2F;0 </span><br><span class="line">add chain&#x3D;prerouting in-interface&#x3D;LAN connection-mark&#x3D;no-mark dst-address-type&#x3D;!local action&#x3D;mark-connection new-connection-mark&#x3D;WAN_HOME per-connection-classifier&#x3D;both-address:2&#x2F;1</span><br></pre></td></tr></table></figure>
+
+<p><strong>建立路由标记</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip firewall mangle </span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_DIRECT in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_DIRECT</span><br><span class="line">add chain&#x3D;prerouting connection-mark&#x3D;WAN_HOME in-interface&#x3D;LAN action&#x3D;mark-routing \ </span><br><span class="line">    new-routing-mark&#x3D;TO_WAN_HOME</span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_DIRECT action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_DIRECT     </span><br><span class="line">add chain&#x3D;output connection-mark&#x3D;WAN_HOME action&#x3D;mark-routing new-routing-mark&#x3D;TO_WAN_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建路由</strong></p>
+<p>策略路由 distance 默认为 0，之后创建备用的 distance 为 1 的路由备用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;ip route</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 routing-mark&#x3D;TO_WAN_DIRECT check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 routing-mark&#x3D;TO_WAN_HOME check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.1.1 distance&#x3D;1 check-gateway&#x3D;ping</span><br><span class="line">add dst-address&#x3D;0.0.0.0&#x2F;0 gateway&#x3D;192.168.2.1 distance&#x3D;2 check-gateway&#x3D;ping</span><br></pre></td></tr></table></figure>
+
+<p><strong>SNAT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall nat </span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-DIRECT action&#x3D;masquerade</span><br><span class="line">add chain&#x3D;srcnat out-interface&#x3D;WAN-CT-HOME action&#x3D;masquerade</span><br></pre></td></tr></table></figure>
+
+<p><strong>策略路由</strong></p>
+<p>防止策略路由导致的路由环路，处理 WAN 的局部网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F; ip firewall mangle</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.1.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br><span class="line">add chain&#x3D;prerouting dst-address&#x3D;192.168.2.0&#x2F;24  action&#x3D;accept in-interface&#x3D;LAN</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RouterOS/" rel="tag"># RouterOS</a>
+              <a href="/tags/Router/" rel="tag"># Router</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/25/mac-java-dev-env/" rel="prev" title="Mac 下的 Java 开发环境配置">
+      <i class="fa fa-chevron-left"></i> Mac 下的 Java 开发环境配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/05/openwrt-config/" rel="next" title="OpenWrt 路由器配置">
+      OpenWrt 路由器配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新机联网"><span class="nav-number">2.</span> <span class="nav-text">新机联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改默认配置"><span class="nav-number">2.1.</span> <span class="nav-text">修改默认配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置公网"><span class="nav-number">2.2.</span> <span class="nav-text">配置公网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网配置"><span class="nav-number">2.3.</span> <span class="nav-text">内网配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VLAN"><span class="nav-number">3.</span> <span class="nav-text">VLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内网-VLAN-配置"><span class="nav-number">3.1.</span> <span class="nav-text">内网 VLAN 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Firewall"><span class="nav-number">4.</span> <span class="nav-text">Firewall</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT"><span class="nav-number">4.1.</span> <span class="nav-text">NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置端口转发"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置端口转发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter"><span class="nav-number">4.2.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAN-负载均衡"><span class="nav-number">4.3.</span> <span class="nav-text">WAN 负载均衡</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Etby</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Etby</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
